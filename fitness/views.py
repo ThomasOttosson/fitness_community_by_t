@@ -360,3 +360,70 @@ def payment_success(request):  # handle Stripe callbacks
         return redirect('order_confirmation')
     messages.error(request, 'No payment info found.')
     return redirect('home')
+
+
+@login_required
+def order_history(request):  # list past orders
+    orders = Order.objects.filter(user=request.user).order_by('-order_date')
+    return render(request, 'registration/order_history.html',
+                  {'orders': orders})
+
+
+@login_required
+@require_POST
+def create_subscription_checkout(request, item_type, pk):  # start sub flow
+    if item_type == 'exercise_plan':
+        plan = get_object_or_404(ExercisePlan, pk=pk)
+    elif item_type == 'nutrition_plan':
+        plan = get_object_or_404(NutritionPlan, pk=pk)
+    else:
+        messages.error(request, 'Invalid subscription type.')
+        return redirect('home')
+    if not plan.stripe_price_id:
+        messages.error(request, 'Price ID not configured.')
+        return redirect(request.META.get('HTTP_REFERER', 'home'))
+    try:
+        cs = stripe.checkout.Session.create(
+            customer_email=request.user.email,
+            payment_method_types=['card'],
+            line_items=[{'price': plan.stripe_price_id, 'quantity': 1}],
+            mode='subscription',
+            success_url=(
+                request.build_absolute_uri(
+                    '/payment-success/?session_id='
+                ) + '{CHECKOUT_SESSION_ID}'
+            ),
+            cancel_url=request.build_absolute_uri('/checkout/?cancelled=true'),
+            metadata={
+                'user_id': request.user.id,
+                'item_type': item_type,
+                'item_id': plan.id,
+            },
+        )
+    except stripe.error.StripeError as exc:
+        messages.error(request, f'Error starting checkout: {exc}')
+        return redirect(request.META.get('HTTP_REFERER', 'home'))
+    return redirect(cs.url, code=303)
+
+
+def has_active_subscription(user, plan_type=None, plan_id=None):  # helper
+    if not user.is_authenticated:
+        return False
+    subs = user.subscriptions.filter(is_active=True)
+    if plan_type == 'exercise_plan' and plan_id:
+        return subs.filter(exercise_plan__id=plan_id).exists()
+    if plan_type == 'nutrition_plan' and plan_id:
+        return subs.filter(nutrition_plan__id=plan_id).exists()
+    if plan_type is None:
+        return subs.exists()
+    return False
+
+
+@login_required
+def subscribed_dashboard(request):  # premium dashboard
+    if not has_active_subscription(request.user):
+        messages.warning(request, 'Active subscription required.')
+        return redirect('home')
+    active = request.user.subscriptions.filter(is_active=True)
+    return render(request, 'registration/subscribed_dashboard.html',
+                  {'active_subscriptions': active})
