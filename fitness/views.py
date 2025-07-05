@@ -210,3 +210,33 @@ def add_to_cart(request, item_type, pk):  # add chosen item to cart
             else cart_item.get_item_object().title)
     messages.success(request, f"'{name}' added to cart.")
     return redirect('cart_detail')
+
+@login_required
+def cart_detail(request):  # show cart
+    cart = getattr(request.user, 'cart', None)
+    return render(request, 'registration/cart_detail.html', {'cart': cart})
+
+
+@require_POST
+@login_required
+def update_cart_item(request, item_id):  # change cart quantity
+    item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
+    qty = int(request.POST.get('quantity', 1))
+    if qty <= 0:
+        item.delete()
+        messages.success(request, 'Item removed.')
+    else:
+        item.quantity = qty
+        item.save()
+        messages.success(request, 'Quantity updated.')
+    return redirect('cart_detail')
+
+
+@require_POST
+@login_required
+def remove_from_cart(request, item_id):  # remove cart item
+    itm = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
+    name = itm.get_item_object()
+    itm.delete()
+    messages.success(request, f"'{name}' removed from cart.")
+    return redirect('cart_detail')
