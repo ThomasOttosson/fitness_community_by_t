@@ -50,3 +50,68 @@ if (userSearchInput) {
     });
   });
 }
+
+/**
+ * Attaches event listeners to filter radio buttons to show/hide user rows
+ * based on data-user-type attribute.
+ */
+document.querySelectorAll('input[name="filter"]').forEach((radio) => {
+  radio.addEventListener('change', function () {
+    const filter = this.getAttribute('data-filter');
+    const rows = document.querySelectorAll('#usersTable tbody tr');
+
+    rows.forEach((row) => {
+      const userType = row.getAttribute('data-user-type') || '';
+
+      if (filter === 'all' || userType.includes(filter)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+});
+
+/**
+ * Placeholder function for exporting user data.
+ * @function exportUsers
+ */
+function exportUsers() {
+  alert('Export functionality would be implemented here');
+}
+
+/**
+ * Reloads the page to refresh data.
+ * @function refreshData
+ */
+function refreshData() {
+  location.reload();
+}
+
+/**
+ * Executes code after the DOM is fully loaded.
+ * Handles card animation and attaches event listeners to buttons.
+ */
+document.addEventListener('DOMContentLoaded', function () {
+  const cards = document.querySelectorAll('.hover-lift');
+  cards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      card.style.transition = 'all 0.5s ease';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, index * 100);
+  });
+
+  // Attach event listeners for functions to clear JSHint "unused" warnings
+  const exportBtn = document.getElementById('exportUsersBtn');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', exportUsers);
+  }
+
+  const refreshBtn = document.getElementById('refreshDataBtn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', refreshData);
+  }
+});
