@@ -100,3 +100,150 @@ button:hover, .custom-btn:hover {
         var(--gradient-start), var(--gradient-end));
     color: var(--light-text);
 }
+.custom-btn-primary-gradient:hover {
+    background-image: linear-gradient(90deg,
+        var(--gradient-start), var(--primary-accent));
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    color: var(--light-text);
+}
+.custom-btn-outline-white {
+    background-image: none;
+    background-color: transparent;
+    border: 2px solid var(--light-text);
+    color: var(--light-text);
+}
+.custom-btn-outline-white:hover {
+    background-color: var(--light-text);
+    color: var(--dark-text);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.form-control, .form-select {
+    border: 2px solid var(--input-border-color);
+    border-radius: 20px !important;
+    padding: 0.8em;
+    background-color: transparent;
+    color: var(--dark-text);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 0 0.25rem
+        rgba(var(--input-focus-border-color-rgb), .25);
+    background-color: transparent;
+}
+
+.form-floating > label {
+    color: var(--input-label-color);
+    padding: 0.8em 0.8em 0.8em 1.1em;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select:focus ~ label,
+.form-floating > .form-select:not([value=""]):valid ~ label {
+    transform: scale(0.9) translateY(-0.5rem) translateX(0.2rem);
+    padding: 0.4em 0.6em;
+    background-color: var(--input-label-bg);
+    border-radius: 0.25rem;
+}
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    background-color: var(--light-section-bg);
+}
+
+.bg-custom-header {
+    background-color: var(--header-bg) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.bg-custom-footer {
+    background-color: var(--footer-bg) !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--dark-text);
+}
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+    color: var(--primary-accent);
+}
+
+.navbar-light .navbar-brand {
+    color: var(--dark-text);
+}
+
+.navbar-light .navbar-toggler {
+    border-color: rgba(0,0,0,.1);
+}
+.navbar-light .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+.dropdown-menu .dropdown-item {
+    color: var(--dark-text);
+}
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+    background-color: var(--primary-accent);
+    color: var(--dark-text);
+}
+
+.card {
+    background-color: var(--light-section-bg);
+    border-color: #e0e0e0;
+    border-radius: .5rem;
+}
+
+.card-header {
+    background-color: var(--highlight-bg);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.hover-lift {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-primary {
+    background-image: linear-gradient(90deg,
+        var(--gradient-start), var(--gradient-end));
+    border: none;
+    color: var(--light-text);
+}
+.btn-primary:hover {
+    background-image: linear-gradient(90deg,
+        var(--gradient-start), var(--primary-accent));
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    color: var(--light-text);
+}
+
+.mb-6 { margin-bottom: 4rem !important; }
+
+.badge.bg-success {
+    background-color: var(--primary-accent) !important;
+    color: var(--dark-text) !important;
+}
+.badge.bg-secondary {
+    background-color: var(--dashboard-inactive-bg) !important;
+    color: var(--light-text) !important;
+}
+.badge.bg-info {
+    background-color: var(--dashboard-secondary-icon-bg) !important;
+    color: var(--light-text) !important;
+}
+.badge.bg-danger {
+    background-color: var(--dashboard-danger-bg) !important;
+    color: var(--light-text) !important;
+}
+.badge.bg-warning {
+    background-color: var(--dashboard-warning-icon-bg) !important;
+    color: var(--dark-text) !important;
+}
+.badge.bg-primary {
+    background-color: var(--dashboard-primary-icon-bg) !important;
+    color: var(--dark-text) !important;
+}
