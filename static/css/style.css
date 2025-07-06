@@ -445,3 +445,137 @@ button:hover, .custom-btn:hover {
 .status-dot.bg-inactive {
     background-color: var(--dashboard-danger-bg) !important;
 }
+
+label {
+    height: fit-content !important;
+}
+
+.header-logo {
+  height: 80px;
+  margin-right: 10px;
+}
+
+.contact-image {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.subscribe-form .form-control, .subscribe-form .form-select{
+    border: 2px solid #333 !important;
+}
+
+.subscribe-section-bg {
+  background-color: var(--primary-accent);
+}
+
+.subscribe-button-style {
+  background-image: linear-gradient(
+    90deg,
+    var(--dark-text),
+    var(--gradient-start)
+  );
+  color: var(--primary-accent);
+}
+
+.testimonial-card-max-width {
+  max-width: 700px;
+}
+
+.plan-detail-image {
+  max-height: 450px;
+  object-fit: contain;
+}
+
+.quantity-input-width {
+  width: 80px;
+}
+
+.nutrition-plan-detail-image {
+  max-height: 450px;
+  object-fit: contain;
+}
+
+.quantity-input-width {
+  width: 80px;
+}
+
+.product-detail-image {
+  max-height: 450px;
+  object-fit: contain;
+}
+
+.quantity-input-width {
+  width: 80px;
+}
+
+.cart-quantity-input {
+  width: 80px;
+}
+
+.exercise-plan-content-image {
+  max-height: 250px;
+  object-fit: cover;
+}
+
+.nutrition-plan-content-image {
+  max-height: 250px;
+  object-fit: cover;
+}
+
+.payment-failed-try-again-btn {
+  background-image: linear-gradient(90deg, #ffc107, #e0a800);
+}
+
+.profile-logout-btn {
+  background-image: linear-gradient(90deg, #dc3545, #bd2130);
+}
+
+.dashboard-icon-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  width: 60px;
+  height: 60px;
+}
+
+.dashboard-icon-circle.bg-users {
+  background-color: #d1ecf1;
+}
+.dashboard-icon-circle.bg-subscribers {
+  background-color: #d4edda;
+}
+.dashboard-icon-circle.bg-staff {
+  background-color: #fff3cd;
+}
+.dashboard-icon-circle.bg-active-users {
+  background-color: #cce5ff;
+}
+
+.user-avatar-circle {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--primary-accent);
+  color: white;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.status-dot.bg-active {
+  background-color: var(--success);
+}
+
+.status-dot.bg-inactive {
+  background-color: var(--danger);
+}
