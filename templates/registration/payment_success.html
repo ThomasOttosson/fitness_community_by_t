@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Payment Status{% endblock %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm border-0 my-5">
+                <div class="card-body p-4">
+                    {% if status == 'success' %}
+                        <h2 class="text-success mb-4"><i class="fas fa-check-circle me-2"></i>Payment Successful! 🎉</h2>
+                        <p class="lead">Thank you for your purchase. Your order has been placed successfully.</p>
+                        <p class="text-muted mb-4">You will receive an email confirmation shortly.</p>
+                        <a href="{% url 'home' %}" class="custom-btn mt-3">Continue Shopping</a>
+                    {% elif status == 'pending' %}
+                        <h2 class="text-warning mb-4"><i class="fas fa-hourglass-half me-2"></i>Payment Processing...</h2>
+                        <p class="lead">Your payment is currently being processed or requires further action.</p>
+                        <p class="text-muted mb-4">Please check back later or contact support if the issue persists.</p>
+                        <a href="{% url 'home' %}" class="custom-btn custom-btn-outline-dark mt-3">Return to Home</a>
+                    {% else %}
+                        <h2 class="text-danger mb-4"><i class="fas fa-times-circle me-2"></i>Payment Failed! 😔</h2>
+                        <p class="lead">Unfortunately, your payment could not be processed.</p>
+                        <p class="text-muted mb-4">Please try again or contact support for assistance.</p>
+                        <a href="{% url 'checkout' %}" class="custom-btn mt-3 payment-failed-try-again-btn">Try Again</a>
+                        <a href="{% url 'cart_detail' %}" class="custom-btn btn-outline-dark mt-3 ms-2">View Cart</a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

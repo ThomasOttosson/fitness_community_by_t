@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Checkout - Fitness Site{% endblock %}
+{% block meta_description %}Finalize your purchase on Fitness Site. Securely pay for your selected exercise plans, nutrition plans, and products via Stripe.{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div id="stripe-credentials" 
+         data-publishable-key="{{ stripe_publishable_key }}" 
+         data-client-secret="{{ client_secret }}"
+         style="display: none;"></div>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-custom-header py-3">
+                    <h2 class="mb-0 text-center text-dark">Checkout</h2>
+                </div>
+                <div class="card-body p-4">
+                    {% if cart and cart.items.all %}
+                        <h4 class="mb-3 fw-bold">Order Summary</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-4">
+                                <caption class="visually-hidden">Order Summary</caption>
+                                <thead>
+                                    <tr class="table-light">
+                                        <th scope="col" class="fw-semibold text-dark">Item</th>
+                                        <th scope="col" class="fw-semibold text-dark text-center">Quantity</th>
+                                        <th scope="col" class="fw-semibold text-dark text-center">Price</th>
+                                        <th scope="col" class="fw-semibold text-dark text-center">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in cart.items.all %}
+                                        <tr>
+                                            <td>
+                                                {% if item.exercise_plan %}
+                                                    {{ item.exercise_plan.title }}
+                                                {% elif item.nutrition_plan %}
+                                                    {{ item.nutrition_plan.title }}
+                                                {% elif item.product %}
+                                                    {{ item.product.name }}
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">{{ item.quantity }}</td>
+                                            <td class="text-center">${{ item.price_at_addition|floatformat:2 }}</td>
+                                            <td class="text-center">${{ item.get_total|floatformat:2 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr class="table-light">
+                                        <td colspan="3" class="text-end fw-bold fs-5 text-dark">Subtotal:</td>
+                                        <td class="text-center fw-bold fs-5 text-dark">${{ cart.get_total_cost|floatformat:2 }}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <h4 class="mb-3 fw-bold">Payment Details</h4>
+                        <form id="payment-form" method="post">
+                            {% csrf_token %}
+                            <div id="payment-element-container" class="mb-3 p-3 border rounded-3 bg-light" aria-label="Payment information">
+                                <!-- Stripe's Payment Element will be inserted here -->
+                            </div>
+                            <button type="submit" id="submit-button" class="custom-btn custom-btn-lg mt-3">
+                                <i class="fas fa-lock" aria-hidden="true"></i><span class="ms-2">Pay Now</span>
+                            </button>
+                            <div id="payment-message" class="mt-3 text-danger fw-bold" style="display: none;"></div>
+                        </form>
+
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-shopping-cart display-1 mb-3 text-muted opacity-50" aria-hidden="true"></i>
+                            <p class="lead mb-4">Your cart is empty. Please add items before checking out.</p>
+                            <a href="{% url 'home' %}" class="custom-btn">
+                                Start Shopping <i class="fas fa-arrow-right" aria-hidden="true"></i><span class="ms-2">Start Shopping</span>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

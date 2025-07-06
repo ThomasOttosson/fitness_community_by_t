@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.name }} - Fitness Site{% endblock %}
+{% block meta_description %}{{ product.name }}: {{ product.description|truncatechars:150 }}. Price: ${{ product.price|floatformat:2 }}. Available now! Support your fitness goals.{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <div class="card shadow-sm border-0 product-detail-card">
+                <div class="card-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6 text-center">
+                            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/product_placeholder.jpg' %}{% endif %}" 
+                                 class="img-fluid rounded-3 shadow-sm product-detail-image" alt="{{ product.name }}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <h1 class="display-5 fw-bold mb-2">{{ product.name }}</h1>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="star-rating me-2 fs-5">
+                                    {% with rating=product.average_rating|floatformat:"0" %}
+                                        {% for i in 5|ljust:5 %}
+                                            {% if forloop.counter <= rating %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star star-rating-empty"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endwith %}
+                                </div>
+                                <span class="review-count-text fs-6">({{ product.review_count }} Reviews)</span>
+                            </div>
+
+                            <p class="fs-4 fw-bold text-primary mb-3">${{ product.price|floatformat:2 }}</p>
+                            
+                            <p class="text-dark mb-4">{{ product.description }}</p>
+                            <p class="text-muted mb-4"><strong>Availability:</strong> {% if product.stock > 0 %}In Stock ({{ product.stock }}){% else %}Out of Stock{% endif %}</p>
+
+                            {% if user.is_authenticated %}
+                                {% if product.stock > 0 %}
+                                    <form action="{% url 'add_to_cart' 'product' product.id %}" method="post" class="d-flex align-items-center mb-4">
+                                        {% csrf_token %}
+                                        <div class="form-group me-3">
+                                            <label for="quantity" class="form-label visually-hidden">Quantity</label>
+                                            <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control text-center quantity-input-width">
+                                        </div>
+                                        <button type="submit" name="add_to_cart" class="custom-btn custom-btn-lg">
+                                            <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <div class="alert alert-warning" role="alert">This product is currently out of stock.</div>
+                                {% endif %}
+                            {% else %}
+                                <div class="alert alert-info text-center" role="alert">
+                                    Please <a href="{% url 'login' %}" class="alert-link">log in</a> to add this product to your cart.
+                                </div>
+                            {% endif %}
+
+                            <a href="{% url 'product_list' %}" class="custom-btn btn-outline-dark btn-sm mt-3">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Products
+                            </a>
+                        </div>
+                    </div>
+
+                    <hr class="my-5">
+                    <h3 class="section-heading text-center mb-4">Customer Reviews</h3>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            {% if reviews %}
+                                <ul class="list-group mb-4">
+                                    {% for review in reviews %}
+                                        <li class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
+                                            <div>
+                                                <strong>{{ review.user.username }}</strong> rated it 
+                                                <span class="star-rating fs-6">
+                                                    {% for i in 5|ljust:5 %}
+                                                        {% if forloop.counter <= review.rating %}
+                                                            <i class="fas fa-star"></i>
+                                                        {% else %}
+                                                            <i class="far fa-star star-rating-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </span>
+                                                <small class="text-muted d-block d-sm-inline-block">on {{ review.created_at|date:"M d, Y" }}</small>
+                                                {% if review.comment %}
+                                                    <p class="mt-2 mb-0">{{ review.comment }}</p>
+                                                {% endif %}
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="alert alert-info text-center" role="alert">
+                                    No reviews yet. Be the first to review this product!
+                                </div>
+                            {% endif %}
+
+                            <h4 class="mt-4 mb-3">Leave a Review:</h4>
+                            {% if user.is_authenticated %}
+                                {# Iterates through form fields to create Bootstrap floating labels #}
+                                <form method="post" class="mb-5">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                        <div class="form-floating mb-3">
+                                            {{ field }}
+                                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                            {% if field.help_text %}
+                                                <div class="form-text text-muted">{{ field.help_text }}</div>
+                                            {% endif %}
+                                            {% for error in field.errors %}
+                                                <div class="invalid-feedback d-block">{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+                                    
+                                    <div class="d-grid mt-4">
+                                        <button type="submit" class="custom-btn custom-btn-lg">Submit Review</button>
+                                    </div>
+                                </form>
+                            {% else %}
+                                <div class="alert alert-warning text-center" role="alert">
+                                    Please <a href="{% url 'login' %}" class="alert-link">log in</a> to leave a review.
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
