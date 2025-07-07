@@ -227,3 +227,61 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial filter application when the page loads
   filterUsersTable();
 });
+
+// Stripe Payment Integration
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on the checkout page by looking for the payment element container
+    const paymentElementContainer = document.getElementById('payment-element-container');
+    const stripeCredentials = document.getElementById('stripe-credentials');
+    
+    if (paymentElementContainer && stripeCredentials) {
+        // Get credentials from the data attributes
+        const stripePublishableKey = stripeCredentials.dataset.publishableKey;
+        const clientSecret = stripeCredentials.dataset.clientSecret;
+        
+        if (!stripePublishableKey || !clientSecret) {
+            paymentElementContainer.innerHTML = 
+                '<div class="alert alert-danger">Payment configuration is missing. Please try again or contact support.</div>';
+            return;
+        }
+        
+        // Initialize Stripe with the publishable key
+        const stripe = Stripe(stripePublishableKey);
+        
+        // Create Elements instance with the client secret
+        const elements = stripe.elements({
+            clientSecret: clientSecret
+        });
+        
+        // Create and mount the Payment Element
+        const paymentElement = elements.create('payment');
+        paymentElement.mount(paymentElementContainer);
+        
+        // Set up form submission
+        const form = document.getElementById('payment-form');
+        const submitButton = document.getElementById('submit-button');
+        const paymentMessage = document.getElementById('payment-message');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitButton.disabled = true;
+            
+            const { error } = await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                    return_url: window.location.origin + '/payment-success/',
+                },
+            });
+            
+            if (error) {
+                if (error.type === "card_error" || error.type === "validation_error") {
+                    paymentMessage.textContent = error.message;
+                } else {
+                    paymentMessage.textContent = "An unexpected error occurred.";
+                }
+                paymentMessage.classList.remove('hidden');
+                submitButton.disabled = false;
+            }
+        });
+    }
+});
