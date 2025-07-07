@@ -115,3 +115,115 @@ document.addEventListener('DOMContentLoaded', function () {
     refreshBtn.addEventListener('click', refreshData);
   }
 });
+
+/**
+ * Updates the current time displayed in the dashboard header.
+ * Uses native Date and toLocaleTimeString for formatted output.
+ */
+function updateCurrentTime() {
+  const now = new Date();
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
+  const timeElement = document.getElementById("current-time");
+  if (timeElement) {
+    timeElement.textContent = now.toLocaleTimeString(undefined, options);
+  }
+}
+
+// Update time every second and call once on load
+setInterval(updateCurrentTime, 1000);
+updateCurrentTime();
+
+/**
+ * Placeholder function for exporting user data.
+ * In a real application, this would trigger a backend process.
+ */
+function exportUsers() {
+  alert("Export Users functionality coming soon!");
+}
+
+/**
+ * Placeholder function for refreshing data.
+ * Currently reloads the page.
+ */
+function refreshData() {
+  alert("Refreshing data... (In a real app, this would re-fetch data).");
+  location.reload();
+}
+
+/**
+ * Filters the users table based on search input and selected radio filter.
+ * Hides rows that do not match the criteria.
+ */
+function filterUsersTable() {
+  const userSearchInput = document.getElementById("userSearch");
+  const selectedFilterInput = document.querySelector(
+    'input[name="filter"]:checked'
+  );
+  const usersTable = document.getElementById("usersTable");
+
+  // Exit if critical elements are not found (e.g., script included on wrong page)
+  if (!userSearchInput || !selectedFilterInput || !usersTable) {
+    return;
+  }
+
+  const searchValue = userSearchInput.value.toLowerCase();
+  const selectedFilter = selectedFilterInput.dataset.filter;
+  const rows = usersTable.querySelectorAll("tbody tr");
+
+  rows.forEach((row) => {
+    const usernameElement = row.querySelector("td:nth-child(1) .fw-semibold");
+    const emailElement = row.querySelector("td:nth-child(2) .fw-medium");
+    const userTypes = row.dataset.userType || ""; // Default to empty string if not set
+
+    const username = usernameElement ? usernameElement.textContent.toLowerCase() : '';
+    const email = emailElement ? emailElement.textContent.toLowerCase() : '';
+
+    const matchesSearch = username.includes(searchValue) || email.includes(searchValue);
+    let matchesFilter = false;
+
+    if (selectedFilter === "all") {
+      matchesFilter = true;
+    } else if (selectedFilter === "subscribers") {
+      matchesFilter = userTypes.includes("subscriber");
+    } else if (selectedFilter === "staff") {
+      matchesFilter = userTypes.includes("staff");
+    }
+
+    // Set display property based on filter results
+    row.style.display = (matchesSearch && matchesFilter) ? "" : "none";
+  });
+}
+
+// Event listeners setup after the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  const userSearchInput = document.getElementById("userSearch");
+  if (userSearchInput) {
+    userSearchInput.addEventListener("keyup", filterUsersTable);
+  }
+
+  const filterRadios = document.querySelectorAll('input[name="filter"]');
+  filterRadios.forEach((radio) => {
+    radio.addEventListener("change", filterUsersTable);
+  });
+
+  const exportBtn = document.getElementById("exportUsersBtn");
+  if (exportBtn) {
+    exportBtn.addEventListener("click", exportUsers);
+  }
+
+  const refreshBtn = document.getElementById("refreshDataBtn");
+  if (refreshBtn) {
+    refreshBtn.addEventListener("click", refreshData);
+  }
+
+  // Initial filter application when the page loads
+  filterUsersTable();
+});
