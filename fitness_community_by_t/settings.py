@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'fitnessSite.urls'
+ROOT_URLCONF = 'fitness_community_by_t.urls'
 
 TEMPLATES = [
     {
@@ -78,7 +78,7 @@ TEMPLATES = [
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 
-WSGI_APPLICATION = 'fitnessSite.wsgi.application'
+WSGI_APPLICATION = 'fitness_community_by_t.wsgi.application'
 
 
 # --------------------------------------------------------------------------- #
