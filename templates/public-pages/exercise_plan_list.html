@@ -1,7 +1,7 @@
-{# templates/public-pages/exercise_plan_list.html #}
 {% extends 'base.html' %}
 {% block title %}Exercise Plans - Fitness Site{% endblock %}
 {% block meta_description %}Browse our comprehensive range of exercise plans, from beginner workouts to advanced training programs. Find the perfect plan for your fitness goals.{% endblock %}
+{% load static rating_extras %}
 
 {% block content %}
 {% load static %}
@@ -17,21 +17,18 @@
                     <h5 class="card-title fw-bold">{{ plan.title }}</h5>
                     <p class="card-text text-muted">{{ plan.description|truncatechars:100 }}</p>
                     
-                    {# Product Rating #}
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="star-rating me-2">
-                            {% with rating=plan.average_rating|floatformat:"0" %} {# Rounded to nearest whole star #}
-                                {% for i in 5|ljust:5 %} {# Loop 5 times for 5 stars #}
-                                    {% if forloop.counter <= rating %}
-                                        <i class="fas fa-star"></i>
-                                    {% else %}
-                                        <i class="far fa-star star-rating-empty"></i>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endwith %}
+                        {# Product Rating #}
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="star-rating me-2">
+                                {# 4.7 → 5, 4.4 → 4, None → 0 #}
+                                {% with plan.average_rating|round_int as rounded %}
+                                    {% for _ in "12345" %}
+                                        <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
+                                    {% endfor %}
+                                {% endwith %}
+                            </div>
+                            <span class="review-count-text">({{ plan.review_count }} Reviews)</span>
                         </div>
-                        <span class="review-count-text">({{ plan.review_count }} Reviews)</span>
-                    </div>
 
                     <p class="card-text fw-bold fs-5 mt-auto">${{ plan.price|floatformat:2 }}</p> {# mt-auto pushes price and button to bottom #}
                     <a href="{% url 'exercise_plan_detail' plan.id %}" class="custom-btn btn-sm">View Details</a>

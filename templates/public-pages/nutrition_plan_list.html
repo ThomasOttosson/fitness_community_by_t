@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 {% block title %}Nutrition Plans - Fitness Site{% endblock %}
 {% block meta_description %}Explore our expert-designed nutrition plans for weight loss, muscle gain, and healthy eating. Find a diet and meal plan tailored to your health objectives.{% endblock %}
+{% load static rating_extras %}
 
 {% block content %}
 {% load static %}
@@ -19,19 +20,16 @@
 
                     {# Product Rating #}
                     <div class="d-flex align-items-center mb-3">
-                        <div class="star-rating me-2">
-                            {% with rating=plan.average_rating|floatformat:"0" %}
-                                {% for i in 5|ljust:5 %}
-                                    {% if forloop.counter <= rating %}
-                                        <i class="fas fa-star"></i>
-                                    {% else %}
-                                        <i class="far fa-star star-rating-empty"></i>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endwith %}
+                            <div class="star-rating me-2">
+                                {# 4.7 → 5, 4.4 → 4, None → 0 #}
+                                {% with plan.average_rating|round_int as rounded %}
+                                    {% for _ in "12345" %}
+                                        <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
+                                    {% endfor %}
+                                {% endwith %}
+                            </div>
+                            <span class="review-count-text">({{ plan.review_count }} Reviews)</span>
                         </div>
-                        <span class="review-count-text">({{ plan.review_count }} Reviews)</span>
-                    </div>
 
                     <p class="card-text fw-bold fs-5 mt-auto">${{ plan.price|floatformat:2 }}</p>
                     <a href="{% url 'nutrition_plan_detail' plan.id %}" class="custom-btn btn-sm">View Details</a>

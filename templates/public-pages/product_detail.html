@@ -4,6 +4,8 @@
 
 {% block content %}
 {% load static %}
+{% load static rating_extras %}
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-12">
@@ -18,20 +20,17 @@
                         <div class="col-md-6">
                             <h1 class="display-5 fw-bold mb-2">{{ product.name }}</h1>
                             
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="star-rating me-2 fs-5">
-                                    {% with rating=product.average_rating|floatformat:"0" %}
-                                        {% for i in 5|ljust:5 %}
-                                            {% if forloop.counter <= rating %}
-                                                <i class="fas fa-star"></i>
-                                            {% else %}
-                                                <i class="far fa-star star-rating-empty"></i>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endwith %}
-                                </div>
-                                <span class="review-count-text fs-6">({{ product.review_count }} Reviews)</span>
-                            </div>
+                    {# Product Rating #}
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="star-rating me-2">
+                            {% with product.average_rating|round_int as rounded %}
+                                {% for _ in "12345" %}
+                                    <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                        <span class="review-count-text">({{ product.review_count }} Reviews)</span>
+                    </div>
 
                             <p class="fs-4 fw-bold text-primary mb-3">${{ product.price|floatformat:2 }}</p>
                             
@@ -76,13 +75,11 @@
                                             <div>
                                                 <strong>{{ review.user.username }}</strong> rated it 
                                                 <span class="star-rating fs-6">
-                                                    {% for i in 5|ljust:5 %}
-                                                        {% if forloop.counter <= review.rating %}
-                                                            <i class="fas fa-star"></i>
-                                                        {% else %}
-                                                            <i class="far fa-star star-rating-empty"></i>
-                                                        {% endif %}
-                                                    {% endfor %}
+                                                    {% with review.rating|round_int as rounded_review_rating %}
+                                                        {% for _ in "12345" %}
+                                                            <i class="fas fa-star{% if forloop.counter <= rounded_review_rating %} on{% endif %}"></i>
+                                                        {% endfor %}
+                                                    {% endwith %}
                                                 </span>
                                                 <small class="text-muted d-block d-sm-inline-block">on {{ review.created_at|date:"M d, Y" }}</small>
                                                 {% if review.comment %}
@@ -94,7 +91,7 @@
                                 </ul>
                             {% else %}
                                 <div class="alert alert-info text-center" role="alert">
-                                    No reviews yet. Be the first to review this product!
+                                    No reviews yet. Be the first to review this plan!
                                 </div>
                             {% endif %}
 

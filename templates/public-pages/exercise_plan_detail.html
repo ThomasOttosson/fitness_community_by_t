@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{{ plan.title }} Details - Fitness Site{% endblock %}
 {% block meta_description %}{{ plan.title }}: {{ plan.description|truncatechars:150 }}. {{ plan.duration_weeks }} weeks plan for just ${{ plan.price|floatformat:2 }}. Subscribe now!{% endblock %}
+{% load static rating_extras %}
 
 {% block content %}
 {% load static %}
@@ -18,19 +19,16 @@
                         <div class="col-md-6">
                             <h1 class="display-5 fw-bold mb-2">{{ plan.title }}</h1>
                             
+                            {#  Product rating #}
                             <div class="d-flex align-items-center mb-3">
-                                <div class="star-rating me-2 fs-5">
-                                    {% with rating=plan.average_rating|floatformat:"0" %}
-                                        {% for i in 5|ljust:5 %}
-                                            {% if forloop.counter <= rating %}
-                                                <i class="fas fa-star"></i>
-                                            {% else %}
-                                                <i class="far fa-star star-rating-empty"></i>
-                                            {% endif %}
+                                <div class="star-rating me-2">
+                                    {% with plan.average_rating|round_int as rounded %}
+                                        {% for _ in "12345" %}
+                                            <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
                                         {% endfor %}
                                     {% endwith %}
                                 </div>
-                                <span class="review-count-text fs-6">({{ plan.review_count }} Reviews)</span>
+                                <span class="review-count-text">({{ plan.review_count }} Reviews)</span>
                             </div>
 
                             <p class="fs-4 fw-bold text-primary mb-3">${{ plan.price|floatformat:2 }}</p>
@@ -83,13 +81,11 @@
                                             <div>
                                                 <strong>{{ review.user.username }}</strong> rated it 
                                                 <span class="star-rating fs-6">
-                                                    {% for i in 5|ljust:5 %}
-                                                        {% if forloop.counter <= review.rating %}
-                                                            <i class="fas fa-star"></i>
-                                                        {% else %}
-                                                            <i class="far fa-star star-rating-empty"></i>
-                                                        {% endif %}
-                                                    {% endfor %}
+                                                    {% with review.rating|round_int as rounded_review_rating %}
+                                                        {% for _ in "12345" %}
+                                                            <i class="fas fa-star{% if forloop.counter <= rounded_review_rating %} on{% endif %}"></i>
+                                                        {% endfor %}
+                                                    {% endwith %}
                                                 </span>
                                                 <small class="text-muted d-block d-sm-inline-block">on {{ review.created_at|date:"M d, Y" }}</small>
                                                 {% if review.comment %}

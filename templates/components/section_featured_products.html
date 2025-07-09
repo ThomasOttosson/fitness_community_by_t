@@ -1,4 +1,5 @@
 {% load static %}
+{% load static rating_extras %}
 <section class="section-padding bg-custom-header">
     <div class="container text-center">
         <h2 class="section-heading mb-3">OUR TOP PRODUCTS</h2>
@@ -14,16 +15,13 @@
                         <h5 class="card-title fw-bold">{{ product.name }}</h5>
                         <p class="card-text text-muted">{{ product.description|truncatechars:70 }}</p>
 
-                        {# Product Rating #}
-                        <div class="d-flex align-items-center mb-3">
+                      {# Product Rating #}
+                        <div class="d-flex align-items-center mb-3 mx-auto">
                             <div class="star-rating me-2">
-                                {% with rating=product.average_rating|floatformat:"0" %}
-                                    {% for i in 5|ljust:5 %}
-                                        {% if forloop.counter <= rating %}
-                                            <i class="fas fa-star"></i>
-                                        {% else %}
-                                            <i class="far fa-star star-rating-empty"></i>
-                                        {% endif %}
+                                {# 4.7 → 5, 4.4 → 4, None → 0 #}
+                                {% with product.average_rating|round_int as rounded %}
+                                    {% for _ in "12345" %}
+                                        <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
                                     {% endfor %}
                                 {% endwith %}
                             </div>

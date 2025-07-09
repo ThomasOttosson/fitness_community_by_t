@@ -1,7 +1,7 @@
-{# templates/public-pages/product_list.html #}
 {% extends 'base.html' %}
 {% block title %}Fitness Products - Fitness Site{% endblock %}
 {% block meta_description %}Shop for the best nutrition and exercise products. Find supplements, gear, and more to support your fitness journey at Fitness Site.{% endblock %}
+{% load static rating_extras %}
 
 {% block content %}
 {% load static %}
@@ -20,13 +20,9 @@
                     {# Product Rating #}
                     <div class="d-flex align-items-center mb-3">
                         <div class="star-rating me-2">
-                            {% with rating=product.average_rating|floatformat:"0" %}
-                                {% for i in 5|ljust:5 %}
-                                    {% if forloop.counter <= rating %}
-                                        <i class="fas fa-star"></i>
-                                    {% else %}
-                                        <i class="far fa-star star-rating-empty"></i>
-                                    {% endif %}
+                            {% with product.average_rating|round_int as rounded %}
+                                {% for _ in "12345" %}
+                                    <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
                                 {% endfor %}
                             {% endwith %}
                         </div>
