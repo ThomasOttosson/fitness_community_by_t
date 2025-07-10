@@ -22,6 +22,7 @@ DEBUG = False
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = [
+    'https://fitnesscommunity-30ebceb8eb6b.herokuapp.com/',
     '.herokuapp.com',
     '127.0.0.1',
     'localhost',
