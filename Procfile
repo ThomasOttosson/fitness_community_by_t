@@ -1,1 +1,1 @@
-web: gunicorn my_project.wsgi
+web: gunicorn fitness_community_by_t.wsgi:application
