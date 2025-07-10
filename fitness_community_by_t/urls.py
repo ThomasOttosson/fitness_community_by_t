@@ -14,7 +14,7 @@ from fitness.views import custom_404_view
 from django.contrib.auth.views import LoginView
 from fitness.forms import CustomAuthenticationForm
 
-#SITEMAP CONFIGURATION
+# SITEMAP CONFIGURATION
 sitemaps = {
     'static': StaticViewSitemap,
     'exercise_plans': ExercisePlanSitemap,
