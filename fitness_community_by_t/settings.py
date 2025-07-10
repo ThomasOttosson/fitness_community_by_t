@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # --------------------------------------------------------------------------- #
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 # settings.py – temporary!
 # DEBUG_PROPAGATE_EXCEPTIONS = True
@@ -130,16 +130,29 @@ USE_TZ = True
 # --------------------------------------------------------------------------- #
 # Static & media files
 # --------------------------------------------------------------------------- #
+
+# Media files configuration using django-storages with S3
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'eu-north-1')
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',  # Cache for 1 day
+}
+AWS_S3_FILE_OVERWRITE = False  # Prevent overwriting existing files
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'  # This will be your media URL
+
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STORAGES = {
     'default': {
-        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+        'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
     },
     'staticfiles': {
         'BACKEND': (
