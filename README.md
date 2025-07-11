@@ -1,6 +1,5 @@
 # FitCommunity: Achieve Your Health Goals
 
-[![Project Status](https://img.shields.io/badge/Status-Complete-brightgreen)](https://github.com/ThomasOttosson/fitness_community_by_t)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Project Overview
@@ -10,6 +9,8 @@ This project is a full-stack e-commerce application for a fitness business, desi
 ## Features
 
 ### Navigation & User Access
+
+![hero](/static/images/readme/nav.jpg) 
 
 Responsive Header & Navigation: A clean, responsive header with a light background, subtle shadow, and dynamic navigation links. It includes:
 
@@ -34,32 +35,44 @@ Role-Based Access Control:
 
 ### Content & Catalog
 
+![hero](/static/images/readme/hero.jpg)
+
 - Hero Section: A powerful visual with bold text, "NOW THERE'S NO EXCUSE. GET FIT ON SITE.", accompanied by "GET STARTED" and "MY ACCOUNT" call-to-action buttons.
 
+![health first](/static/images/readme/health-first.png)
 - "Put Your Health First" Section: Highlights the importance of health with compelling text and a relevant image of someone measuring their waist, encouraging users to begin their journey.
 
-- Our Top Products Section: Showcases products in consistent cards with images, names, prices, star ratings, and "VIEW DETAILS" buttons. A "VIEW ALL PRODUCTS" button leads to the full catalog.
+![products](/static/images/readme/top-products.png)
 
+- Our Top Products Section: Showcases products in consistent cards with images, names, prices, star ratings, and "VIEW DETAILS" buttons. A "VIEW ALL PRODUCTS" button leads to the full catalog.
+![subscription](/static/images/readme/subscriptions.png)
 - Exercise Plans Section: Displays various workout routines in card format, including images, plan names, prices, and star ratings, with a "VIEW DETAILS" button and "VIEW ALL EXERCISE PLANS" option. Similarly Nutrition Plans Section: Presents balanced meal guides similarly in cards, featuring images, plan names, prices, and star ratings, alongside "VIEW DETAILS" and "VIEW ALL NUTRITION PLANS" buttons.
 
+![gym anywhere](/static/images/readme/gym-anywhere.png)
 - "Make Your Gym Anywhere" Section: Emphasizes workout flexibility with a strong title, descriptive text, and an image of home exercise, including a "GET STARTED" button.
 
+![subscribe](/static/images/readme/subscribe.png)
 - Subscribe Today Section: A yellow section prompting sign-ups for guided training via email, username, and password fields, finalized by a "GET STARTED" button.
 
+![Testimonial](/static/images/readme/testimonial.png)
 - What Our Clients Say Section: A testimonial carousel showcasing positive feedback from satisfied clients, building trust through their success stories.
 
+![contact](/static/images/readme/get-in-touch.png)
 - "Get In Touch" Section: Provides clear contact information—address, phone, and email—each accompanied by a distinct icon for easy readability.
 
+![footer](/static/images/readme/footer.png)
 - Footer: Contains the brand logo and mission, quick navigation links (Home, Plans, Products, Profile), a newsletter sign-up, and social media connection icons.
   
 * Browseable Lists: Each product type has its own dedicate page as discussed below:
 * Exercise plan page: 
 
+![Exercise plan Page](/static/images/readme/exercise-plan-page.png)
 This page, titled "Our Exercise Plans", showcases various workout subscriptions offered by Fit Community.
 At the top, the Fit Community logo is visible along with navigation links for Home, Exercise Plans, Nutrition Plans, Products, and a user profile dropdown.
 The main content displays individual exercise plans, each presented in a clean card format.
 Each plan card features a relevant image, a descriptive title, a short overview, a star rating with review count, the price, and a "VIEW DETAILS" button.
 
+![ plan Page](/static/images/readme/nutrition-plan-page.png) 
 Our Nutrition Plans Page:
 
 * This page, titled "Our Nutrition Plans," displays various diet and meal planning subscriptions.
@@ -67,6 +80,7 @@ The top includes the Fit Community logo and navigation links.
 Each nutrition plan is presented in a card format, showing a relevant image, plan title, a short description, star rating, and price.
 Users can click "VIEW DETAILS" on each card to learn more about the specific plan.
 
+![product Page](/static/images/readme/product-page.png) 
 * Our Fitness Products Page This page, titled "Our Fitness Products," showcases the merchandise available from Fit Community.
 * The top features the Fit Community logo and standard navigation options.
 Products are displayed in individual cards, each with an image, product name, a brief description, star rating, and price.
@@ -74,61 +88,67 @@ Products are displayed in individual cards, each with an image, product name, a 
 
 Detailed view for the Subscription and product pages:
 
+![Esercise Plan detailed view](/static/images/readme/ex-plan-detailed-view.jpeg)
 Detailed Views: Individual pages for Exercise Plan:
 This page provides detailed information for a specific exercise plan. It features a large image relevant to the plan, the plan's title, price, and duration. A comprehensive description outlines the workout routine's benefits and features. Purchase options include "SUBSCRIBE NOW" and "ADD TO CART (ONE-TIME)," with an adjustable quantity. Below, existing customer reviews are shown, and a form allows authenticated users to submit new ratings and comments. The page concludes with the standard site footer.
 
+![Monthly nut detailed view](/static/images/readme/monthly-nut-detailed.jpeg)
 Nutrition Plan Detailed View Page:
 This page provides a detailed view of a specific nutrition plan, featuring a large image, the plan's title, price, and duration. A comprehensive description outlines the plan's benefits. Purchase options include "SUBSCRIBE NOW" and "ADD TO CART (ONE-TIME)," with a quantity selector. Below, "Customer Reviews" are displayed, and an input form allows authenticated users to submit new ratings and comments. The standard site footer is present at the bottom.
 
 Product Detailed View Page:
+![Exclusive content](/static/images/readme/exclusive-content.jpeg)
 This page presents a specific product in detail, featuring a large image of the item (like gym gloves), its title, and price. A comprehensive description highlights the product's features and benefits, along with availability information. Users can select a quantity and "ADD TO CART." Below, customer reviews are displayed, and an input form allows authenticated users to submit their own ratings and comments. The standard site header and footer are also present.
 
 Profile Page:
-
+![Profile page](/static/images/readme/profile.png)
 This is a personalized dashboard for logged-in users, displaying a "Welcome, [Username]!" message. It's divided into "Account Details," showing the username, email, and join date. "Account Actions" provides links to order history, subscriber dashboard, staff dashboard (if applicable), and an "Edit Profile" option. Below, "Your Active Subscriptions" shows current plans or prompts to browse for new ones. A "LOGOUT" button is prominently displayed for ending the session.
 
 ### E-commerce & Payments
 
 Shopping Cart:
-
+![cart](/static/images/readme/cart.jpg)
 This page functions as the user's persistent shopping cart, where various items can be managed. Users can add products, exercise plans, and nutrition plans, which remain in the cart across sessions. On this page, quantities can be adjusted and items removed, with the total cost updating in real-time. Adding an item to the cart seamlessly redirects the user here with a clear confirmation.
 
 Checkout Process:
-
+![checkout](/static/images/readme/checkout.jpg)
 This secure page displays the order summary, facilitating payment for items in the cart. One-time product purchases use Stripe Payment Intents for secure card collection directly on the page. Subscription purchases for plans redirect users to Stripe Checkout Sessions for optimized recurring payments. The system robustly handles payment outcomes (success, pending, failure) with clear messages and redirects to prevent duplicate notifications.
 
 Subscriber Dashboard Page:
-
+![checkout](/static/images/readme/checkout.jpg)
 This page serves as a personalized hub for subscribers, welcoming them and offering access to exclusive content. It clearly lists "Your Active Subscriptions," detailing each plan (e.g., Nutrition, Exercise) along with its activation date. A prominent "MANAGE MY SUBSCRIPTIONS (STRIPE PORTAL)" button allows users to handle their subscriptions directly via Stripe.
 
 Order & Subscription History:
-
+![order history](/static/images/readme/order-history.jpg)
 This page displays a comprehensive list of all past orders made by the user. Each order is presented in a collapsible panel, showing the order number, date, and total amount. Expanding an order reveals detailed information, including individual items purchased and the payment intent ID. A "CONTINUE SHOPPING" button is available at the bottom to redirect the user back to browse products and plans.
 
 Protected pages for staff & subscribers:
 
 * Staff Dashboard page:
-
+![staff dashboard](/static/images/readme/staff-dashboard.jpeg)
 This "Staff Dashboard" serves as a comprehensive administrative control center. At the top, a "Last updated" timestamp indicates the most recent data refresh. Key performance metrics are prominently displayed in distinct cards: "Total Users," "Active Subscribers," "Staff Members," and "Active Users," each with an icon and count.
+
 An "Administrative Control" section provides quick access to advanced system management and configuration tools via a "DJANGO ADMIN" button. The primary "User Management" section features a search bar for users, and filters to display "ALL USERS," "SUBSCRIBERS," or "STAFF." This section also includes "EXPORT" and "REFRESH" buttons for data handling.
+
 The user table presents detailed information including username, contact details (email or last login), subscription status (e.g., Free), and assigned "STATUS & ROLES" such as "Active," "Staff," and "Admin." The "JOINED" column shows the registration date for each user. Finally, a "BACK TO PROFILE" button allows staff to return to their personal profile page. The standard site header and footer are present. In case the user is not an active subscriber, they will see this notification: "Active subscription required."
+![NO dashboard](/static/images/readme/no-active.jpg)
 
 Subscribers only pages:
-
+![NO dashboard](/static/images/readme/no-active.jpg)
 * Monthly Nutrition Plan Subscription Page:
 
 This exclusive content page is accessible only to users with an active subscription to the "Monthly Nutrition Plan Subscription, Standard or other subscriptions based on which the page content will be updated." It features a prominent title and a congratulatory message confirming the active subscription. An accompanying image highlights the nutrition plan. The page then lists "Your Nutrition Guidelines," which include detailed meal plans, a personalized hydration guide, a printable grocery list, healthy recipe ideas, and exclusive nutrition tips. A clear note states that this content is visible only to subscribers of this specific plan. A "BACK TO DASHBOARD" button allows users to return to their subscriber overview.
 
 Monthly Exercise Plan Subscription Page:
-
+![NO dashboard](/static/images/readme/exercise-content.jpeg)
 This exclusive page provides content visible only to users with an active subscription to this specific exercise plan. It features a congratulatory message and an image illustrating a workout schedule. The page lists "Your Exercise Routines," including warm-ups, detailed full-body, upper-body, and lower-body workouts, cool-downs, and a weekly training schedule. A "BACK TO DASHBOARD" button allows subscribers to return to their overview.
 
 Stripe Customer Portal Page:
-
+![stripe dashboard](/static/images/readme/stripe.jpeg)
 Accessible from the "Subscriber Dashboard," this external portal, hosted by Stripe, allows users to manage their billing and subscriptions directly via Stripe. It displays the user's "PAYMENT METHOD," including default cards and an option to "Add payment method." "BILLING INFORMATION" shows details like name, address, and phone number, with an option to "Update information." Users can also view their "INVOICE HISTORY" here, simplifying billing management. The page emphasizes its partnership with Stripe for secure and simplified billing. On test mode it only works with verified emails.
 
 ### Marketing & SEO
-
+![mailchimp](/static/images/readme/mailchimp.jpg)
 * Mailchimp Newsletter Integration:
 
 * Newsletter signup form in the site footer, directly integrated with Mailchimp API.
@@ -141,7 +161,7 @@ Search Engine Optimization (SEO):
 * Custom 404 Page: Provides a user-friendly experience and proper HTTP status for non-existent URLs.
 
 404 page:
-
+![404 page](/static/images/readme/404.jpeg)
 This page is displayed when a requested URL cannot be found. It prominently shows a large "404" error code and "Page Not Found" message. A concise explanation states the page might be missing or the link is broken. Users are offered a clear "Go to Homepage" button to navigate back to the main site. A small message suggests contacting support if the error persists. The standard site header and footer are visible on this page.
 
 ### User Experience Design (UI/UX)
@@ -180,10 +200,9 @@ Follow these steps to get the Fitness Site running on your local machine:
 1.  Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/your-repo-name.git
+    git clone https://github.com/ThomasOttosson/fitness_community_by_t.git
     cd fitness-site
     ```
-    (Replace `yourusername/your-repo-name.git` with your actual GitHub repository URL).
 
 2.  Create and activate a virtual environment:
 
@@ -387,7 +406,11 @@ Log in as a staff user (e.g., your superuser). Access the Staff Dashboard (`/sta
 
 My inspiration for creating this project stemmed directly from the Code Institute's Full Stack Software Development program, particularly the modules on Django and e-commerce applications. As someone passionate about fitness, health, and personalized wellness journeys, I envisioned building a platform that not only offered valuable resources but also provided a seamless and premium user experience. I wanted to move beyond a static content site and create a dynamic e-commerce solution where users could truly invest in their health through structured plans and quality products.
 
+![wireframe](/static/images/readme/wireframe.jpeg) 
+
 I began the design process by creating a wireframe for the homepage to visualize the user flow and overall aesthetic. My goal was to create a custom, commercial-grade design that felt consistent and premium, applying a specific color palette, custom fonts, and unique button styles throughout the site. This focus on UI/UX was central to the project's success. Before starting the design of the website, I chose the colors and fonts. The logo I designed was created using assets from two sources: https://www.svgrepo.com/ and https://www.canva.com/. The icon was sourced from Svgrepo, and the logo's design was completed in Canva.
+
+![logo](/static/images/fclogo.svg) 
 
 Throughout the development, I embraced the challenge of integrating complex real-world functionalities. Implementing **Stripe for both one-time product purchases and recurring subscriptions** was a significant learning curve, requiring meticulous backend logic for payment intents, checkout sessions, and post-payment order/subscription fulfillment. Managing user data and access through robust **role-based authorization** (distinguishing between general users, subscribers, and staff administrators) further deepened my understanding of secure web applications. Integrating **Mailchimp for newsletter management** and perfecting the **responsive design with Bootstrap 5's intricacies** were also rewarding aspects of this project. Ultimately, overcoming these challenges allowed me to apply my knowledge, explore new tools, and deliver a fully functional, highly polished e-commerce platform.
 

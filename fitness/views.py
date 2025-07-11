@@ -1,5 +1,4 @@
 import json
-import os
 
 import mailchimp_marketing as mailchimp
 import stripe
@@ -15,6 +14,7 @@ from mailchimp_marketing.api_client import ApiClientError
 from .forms import CustomUserCreationForm, NewsletterForm, ReviewForm
 from .models import (Cart, CartItem, ExercisePlan, NutritionPlan, Order,
                      OrderItem, Product, Subscription)
+
 
 @login_required
 def profile(request):  # show user profile
@@ -347,7 +347,9 @@ def payment_success(request):  # handle Stripe callbacks
                                'nutrition_plan' if ci.nutrition_plan else
                                'product'),
                     item_id=obj.id,
-                    item_name=(obj.title if hasattr(obj, 'title') else obj.name),
+                    item_name=(
+                        obj.title if hasattr(obj, 'title') else obj.name
+                    ),
                     quantity=ci.quantity,
                     price=ci.price_at_addition,
                 )
@@ -429,6 +431,7 @@ def subscribed_dashboard(request):  # premium dashboard
     return render(request, 'registration/subscribed_dashboard.html',
                   {'active_subscriptions': active})
 
+
 @login_required
 def exercise_plan_content(request, pk):  # gated exercise content
     plan = get_object_or_404(ExercisePlan, pk=pk)
@@ -474,7 +477,10 @@ def newsletter_signup(request):  # sign up to newsletter
             if details.get('title') == 'Member Exists':
                 messages.warning(request, 'Email already subscribed.')
             else:
-                messages.error(request, f"Mailchimp error: {details.get('detail')}")
+                messages.error(
+                    request,
+                    f"Mailchimp error: {details.get('detail')}"
+                )
         except json.JSONDecodeError:
             messages.error(request, 'Mailchimp unknown error.')
     except Exception as exc:
