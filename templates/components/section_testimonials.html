@@ -1,24 +1,32 @@
 {% load static %}
+{% load static rating_extras %}
 <section class="section-padding bg-light">
     <div class="container text-center">
+        {# Section heading and subheading for testimonials #}
         <h2 class="section-heading mb-3">WHAT OUR CLIENTS SAY</h2>
         <p class="section-subheading">
             Hear from our satisfied members who have transformed their lives with Fitness Site.
         </p>
+        
+        {# Testimonial carousel component #}
         <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            {# Carousel inner content #}
             <div class="carousel-inner">
+                {# First testimonial (active by default) #}
                 <div class="carousel-item active">
                     <div class="testimonial-card mx-auto testimonial-card-max-width">
                         <p>"Fitness Site has truly changed my life! The personalized exercise plans are fantastic, and I've seen amazing results. Highly recommended!"</p>
                         <div class="author">- Jane Doe, Certified User</div>
                     </div>
                 </div>
+                {# Second testimonial #}
                 <div class="carousel-item">
                     <div class="testimonial-card mx-auto testimonial-card-max-width">
                         <p>"The nutrition plans are easy to follow and incredibly effective. I love the flexibility and the constant support. My energy levels are through the roof!"</p>
                         <div class="author">- John Smith, Happy Subscriber</div>
                     </div>
                 </div>
+                {# Third testimonial #}
                 <div class="carousel-item">
                     <div class="testimonial-card mx-auto testimonial-card-max-width">
                         <p>"Finally, a platform that understands my needs! The variety of workouts and the quality of products are unmatched. I'm stronger and healthier than ever."</p>
@@ -26,13 +34,15 @@
                     </div>
                 </div>
             </div>
+            
+            {# Carousel navigation controls #}
             <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+                <span class="visually-hidden">Previous</span> {# Accessibility label for previous button #}
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+                <span class="visually-hidden">Next</span> {# Accessibility label for next button #}
             </button>
         </div>
     </div>

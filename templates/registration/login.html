@@ -6,6 +6,7 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
+            {# Card container for the login form #}
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-custom-header py-3">
                     <h2 class="mb-0 text-center text-dark">Welcome Back!</h2>
@@ -13,6 +14,7 @@
                 <div class="card-body p-4">
                     <p class="lead text-center text-muted mb-4">Log in to your account</p>
 
+                    {# Display any messages (e.g., login errors) #}
                     {% if messages %}
                         <div class="mb-4">
                             {% for message in messages %}
@@ -24,28 +26,33 @@
                         </div>
                     {% endif %}
 
+                    {# Login form #}
                     <form method="post">
                         {% csrf_token %}
                         
-                        {# This loop will now render fields from CustomAuthenticationForm with form-control and placeholders #}
+                        {# Loop through form fields to render input elements #}
                         {% for field in form %}
                             <div class="form-floating mb-3">
                                 {{ field }}
                                 <label for="{{ field.id_for_label }}" class="text-muted">{{ field.label }}</label>
+                                {# Display help text if available #}
                                 {% if field.help_text %}
                                     <div class="form-text text-muted">{{ field.help_text }}</div>
                                 {% endif %}
+                                {# Display form errors if any #}
                                 {% for error in field.errors %}
                                     <div class="invalid-feedback d-block">{{ error }}</div>
                                 {% endfor %}
                             </div>
                         {% endfor %}
                         
+                        {# Login button #}
                         <div class="d-grid mt-4">
                             <button type="submit" class="custom-btn custom-btn-lg">Login</button>
                         </div>
                     </form>
 
+                    {# Links for registration and password reset #}
                     <p class="text-center mt-4 mb-0 text-muted">
                         Don't have an account? <a href="{% url 'register' %}" class="text-decoration-none hover-accent text-primary fw-semibold">Register here</a>.
                     </p>

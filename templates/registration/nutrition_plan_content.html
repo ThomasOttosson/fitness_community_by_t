@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block title %}{{ plan.title }} Content - Fitness Site{% endblock %}
 {% block meta_description %}Access exclusive content for your subscribed Nutrition Plan: {{ plan.title }}. Get detailed meal plans, hydration guides, and recipes.{% endblock %}
 
@@ -7,16 +6,19 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-12">
+            {# Card container for the exclusive content #}
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-custom-header py-3">
                     <h2 class="mb-0 text-center text-dark">{{ plan.title }} - Exclusive Content!</h2>
                 </div>
                 <div class="card-body p-4">
+                    {# Confirmation message for active subscribers #}
                     <p class="lead text-center text-muted mb-4">Congratulations! You have an active subscription to this plan.</p>
                     <hr class="my-4">
                     
                     <div class="row g-4 align-items-start">
                         <div class="col-md-4 text-center">
+                            {# Plan image and motivational message #}
                             <img src="{% if plan.image %}{{ plan.image.url }}{% else %}{% static 'images/plan_placeholder.jpg' %}{% endif %}" 
                                  alt="{{ plan.title }}" class="img-fluid rounded-3 shadow-sm mb-3 nutrition-plan-content-image">
                             <p class="text-muted small">Your journey to a healthier diet starts here!</p>
@@ -24,6 +26,7 @@
 
                         <div class="col-md-8">
                             <h4 class="fw-bold mb-3 text-dark">Your Nutrition Guidelines:</h4>
+                            {# List of nutrition content components #}
                             <ul class="list-group list-group-flush mb-4">
                                 <li class="list-group-item d-flex align-items-center"><i class="fas fa-utensils me-3 text-primary"></i>Detailed Meal Plan: Day 1 (Breakfast, Lunch, Dinner, Snacks)</li>
                                 <li class="list-group-item d-flex align-items-center"><i class="fas fa-utensils me-3 text-primary"></i>Detailed Meal Plan: Day 2 (and beyond!)</li>
@@ -36,6 +39,7 @@
                         </div>
                     </div>
 
+                    {# Back button to user's dashboard #}
                     <div class="text-center mt-5">
                         <a href="{% url 'subscribed_dashboard' %}" class="custom-btn custom-btn-lg">
                             <i class="fas fa-arrow-left me-2"></i>Back to Dashboard

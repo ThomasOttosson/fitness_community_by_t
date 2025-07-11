@@ -6,6 +6,7 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
+            {# Card container for the registration form #}
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-custom-header py-3">
                     <h2 class="mb-0 text-center text-dark">Join Fitness Site!</h2>
@@ -13,6 +14,7 @@
                 <div class="card-body p-4">
                     <p class="lead text-center text-muted mb-4">Create your new account</p>
 
+                    {# Display any system messages (e.g., registration errors) #}
                     {% if messages %}
                         <div class="mb-4">
                             {% for message in messages %}
@@ -24,27 +26,33 @@
                         </div>
                     {% endif %}
 
+                    {# Registration form #}
                     <form method="post">
                         {% csrf_token %}
                         
+                        {# Loop through form fields for dynamic rendering #}
                         {% for field in form %}
                             <div class="form-floating mb-3">
                                 {{ field }}
                                 <label for="{{ field.id_for_label }}" class="text-muted">{{ field.label }}</label>
+                                {# Display help text if available #}
                                 {% if field.help_text %}
                                     <div class="form-text text-muted">{{ field.help_text }}</div>
                                 {% endif %}
+                                {# Display field errors if any #}
                                 {% for error in field.errors %}
                                     <div class="invalid-feedback d-block">{{ error }}</div>
                                 {% endfor %}
                             </div>
                         {% endfor %}
                         
+                        {# Submit button for registration #}
                         <div class="d-grid mt-4">
                             <button type="submit" class="custom-btn custom-btn-lg">Register</button>
                         </div>
                     </form>
 
+                    {# Link to the login page if the user already has an account #}
                     <p class="text-center mt-4 mb-0 text-muted">
                         Already have an account? <a href="{% url 'login' %}" class="text-decoration-none hover-accent text-primary fw-semibold">Login here</a>.
                     </p>

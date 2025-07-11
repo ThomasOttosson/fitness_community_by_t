@@ -3,42 +3,48 @@
 {% block meta_description %}{{ plan.title }}: {{ plan.description|truncatechars:150 }}. {{ plan.duration_weeks }} weeks plan for just ${{ plan.price|floatformat:2 }}. Subscribe for a healthier diet!{% endblock %}
 
 {% block content %}
-{% load static %}
-{% load static rating_extras %}
-
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-12">
+            {# Main card container for the nutrition plan details #}
             <div class="card shadow-sm border-0 product-detail-card">
                 <div class="card-body p-4">
                     <div class="row g-4">
                         <div class="col-md-6 text-center">
+                            {# Plan image with a placeholder if none exists #}
                             <img src="{% if plan.image %}{{ plan.image.url }}{% else %}{% static 'images/plan_placeholder.jpg' %}{% endif %}" 
                                  class="img-fluid rounded-3 shadow-sm nutrition-plan-detail-image" alt="{{ plan.title }}">
                         </div>
 
                         <div class="col-md-6">
+                            {# Plan title and core details #}
                             <h1 class="display-5 fw-bold mb-2">{{ plan.title }}</h1>
                             
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="star-rating me-2 fs-5">
-                                {% with plan.average_rating|round_int as rounded %}
-                                    {% for _ in "12345" %}
-                                        <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
-                                    {% endfor %}
-                                {% endwith %}
+                            {# Display of average rating and review count #}
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="star-rating me-2 fs-5">
+                                    {# Render stars based on average rating #}
+                                    {% with plan.average_rating|round_int as rounded %}
+                                        {% for _ in "12345" %}
+                                            <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
+                                        {% endfor %}
+                                    {% endwith %}
+                                </div>
+                                <span class="review-count-text fs-6">({{ plan.review_count }} Reviews)</span>
                             </div>
-                            <span class="review-count-text fs-6">({{ plan.review_count }} Reviews)</span>
-                        </div>
 
+                            {# Plan price and duration #}
                             <p class="fs-4 fw-bold text-primary mb-3">${{ plan.price|floatformat:2 }}</p>
                             <p class="text-muted mb-4"><strong>Duration:</strong> {{ plan.duration_weeks }} weeks</p>
                             
+                            {# Detailed description of the plan #}
                             <p class="text-dark mb-4">{{ plan.description }}</p>
 
+                            {# Purchase options, conditional on user authentication #}
                             {% if user.is_authenticated %}
                                 <h4 class="mt-4 mb-3 fw-bold">Purchase Options:</h4>
                                 <div class="d-flex flex-column mb-4">
+                                    {# Subscription purchase form #}
                                     <form action="{% url 'create_subscription_checkout' 'nutrition_plan' plan.id %}" method="post" class="mb-2">
                                         {% csrf_token %}
                                         <button type="submit" class="custom-btn custom-btn-lg">
@@ -47,6 +53,7 @@
                                         <small class="form-text text-muted ml-2 d-block"> (Billed recurringly)</small>
                                     </form>
 
+                                    {# Add to Cart (one-time purchase) form #}
                                     <form action="{% url 'add_to_cart' 'nutrition_plan' plan.id %}" method="post" class="d-flex align-items-center">
                                         {% csrf_token %}
                                         <div class="form-group me-3">
@@ -59,11 +66,13 @@
                                     </form>
                                 </div>
                             {% else %}
+                                {# Message for unauthenticated users regarding login for purchase #}
                                 <div class="alert alert-info text-center" role="alert">
                                     Please <a href="{% url 'login' %}" class="alert-link">log in</a> to subscribe or purchase this plan.
                                 </div>
                             {% endif %}
 
+                            {# Back button to the plans list #}
                             <a href="{% url 'nutrition_plan_list' %}" class="custom-btn btn-outline-dark btn-sm mt-3">
                                 <i class="fas fa-arrow-left me-2"></i>Back to Nutrition Plans
                             </a>
@@ -71,16 +80,19 @@
                     </div>
 
                     <hr class="my-5">
+                    {# Customer Reviews Section #}
                     <h3 class="section-heading text-center mb-4">Customer Reviews</h3>
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             {% if reviews %}
+                                {# List of existing reviews #}
                                 <ul class="list-group mb-4">
                                     {% for review in reviews %}
                                         <li class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
                                             <div>
                                                 <strong>{{ review.user.username }}</strong> rated it 
                                                 <span class="star-rating fs-6">
+                                                    {# Render stars for individual review rating #}
                                                     {% with review.rating|round_int as rounded_review_rating %}
                                                         {% for _ in "12345" %}
                                                             <i class="fas fa-star{% if forloop.counter <= rounded_review_rating %} on{% endif %}"></i>
@@ -96,15 +108,18 @@
                                     {% endfor %}
                                 </ul>
                             {% else %}
+                                {# Message when no reviews are available #}
                                 <div class="alert alert-info text-center" role="alert">
                                     No reviews yet. Be the first to review this plan!
                                 </div>
                             {% endif %}
 
+                            {# Review submission form for authenticated users #}
                             <h4 class="mt-4 mb-3">Leave a Review:</h4>
                             {% if user.is_authenticated %}
                                 <form method="post" class="mb-5">
                                     {% csrf_token %}
+                                    {# Render form fields dynamically #}
                                     {% for field in form %}
                                         <div class="form-floating mb-3">
                                             {{ field }}
@@ -118,11 +133,13 @@
                                         </div>
                                     {% endfor %}
                                     
+                                    {# Submit button for the review form #}
                                     <div class="d-grid mt-4">
                                         <button type="submit" class="custom-btn custom-btn-lg">Submit Review</button>
                                     </div>
                                 </form>
                             {% else %}
+                                {# Message for unauthenticated users to log in to leave a review #}
                                 <div class="alert alert-warning text-center" role="alert">
                                     Please <a href="{% url 'login' %}" class="alert-link">log in</a> to leave a review.
                                 </div>

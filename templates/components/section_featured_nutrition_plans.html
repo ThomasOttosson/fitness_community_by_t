@@ -2,21 +2,29 @@
 {% load static rating_extras %}
 <section class="section-padding bg-custom-header">
     <div class="container text-center">
+        {# Section heading and subheading for nutrition plans #}
         <h2 class="section-heading mb-3">NUTRITION PLANS</h2>
         <p class="section-subheading">
             Balanced meal guides and dietary advice to fuel your body and optimize your results.
         </p>
+        
+        {# Grid for displaying featured nutrition plans #}
         <div class="row g-4 justify-content-center">
             {% for plan in featured_nutrition_plans %}
             <div class="col-lg-4 col-md-6 col-sm-6">
+                {# Individual featured nutrition plan card #}
                 <div class="card featured-card h-100">
+                    {# Plan image, with a placeholder if none is set #}
                     <img src="{% if plan.image %}{{ plan.image.url }}{% else %}{% static 'images/plan_placeholder.jpg' %}{% endif %}" class="card-img-top" alt="{{ plan.title }}">
                     <div class="card-body d-flex flex-column">
+                        {# Plan title and truncated description #}
                         <h5 class="card-title fw-bold">{{ plan.title }}</h5>
                         <p class="card-text text-muted">{{ plan.description|truncatechars:70 }}</p>
+                        
+                        {# Display of average rating and review count #}
                         <div class="d-flex align-items-center mb-3 mx-auto">
                             <div class="star-rating me-2">
-                                {# 4.7 → 5, 4.4 → 4, None → 0 #}
+                                {# Visual representation of the plan's rating #}
                                 {% with plan.average_rating|round_int as rounded %}
                                     {% for _ in "12345" %}
                                         <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
@@ -26,17 +34,21 @@
                             <span class="review-count-text">({{ plan.review_count }} Reviews)</span>
                         </div>
 
+                        {# Plan price and button to view details #}
                         <p class="card-text fw-bold fs-5 mt-auto">${{ plan.price|floatformat:2 }}</p>
                         <a href="{% url 'nutrition_plan_detail' plan.id %}" class="custom-btn btn-sm">View Details</a>
                     </div>
                 </div>
             </div>
             {% empty %}
+            {# Message to display when no featured nutrition plans are found #}
             <div class="col-12">
                 <p class="text-muted">No featured nutrition plans available at the moment.</p>
             </div>
             {% endfor %}
         </div>
+        
+        {# Link to the main nutrition plans listing page #}
         <div class="mt-5">
             <a href="{% url 'nutrition_plan_list' %}" class="custom-btn">View All Nutrition Plans</a>
         </div>
