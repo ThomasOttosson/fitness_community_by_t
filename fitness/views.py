@@ -409,7 +409,12 @@ def create_subscription_checkout(request, item_type, pk):  # start sub flow
     return redirect(cs.url, code=303)
 
 
-def has_active_subscription(user, plan_type=None, plan_id=None):  # helper
+'''
+Helper function to check if a user has an active subscription.
+'''
+
+
+def has_active_subscription(user, plan_type=None, plan_id=None):
     if not user.is_authenticated:
         return False
     subs = user.subscriptions.filter(is_active=True)
@@ -489,7 +494,7 @@ def newsletter_signup(request):  # sign up to newsletter
 
 
 @login_required
-def staff_dashboard(request):  # admin overview
+def staff_dashboard(request):  # Renders the staff dashboard
     if not request.user.is_staff:
         messages.error(request, 'Staff only.')
         return redirect('home')
@@ -518,5 +523,5 @@ def staff_dashboard(request):  # admin overview
     return render(request, 'registration/staff_dashboard.html', ctx)
 
 
-def custom_404_view(request, exception):
+def custom_404_view(request, exception):  # Handles 404 Not Found errors
     return render(request, "404.html", status=404)

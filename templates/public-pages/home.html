@@ -3,30 +3,13 @@
 {% block meta_description %}Welcome to Fitness Site! Discover personalized exercise plans, effective nutrition programs, and high-quality fitness products to achieve your health and wellness goals.{% endblock %}
 
 {% block content %}
-    {# Hero section: Main welcoming banner with headline and call to action #}
     {% include 'components/section_hero.html' %}
-    
-    {# Featured benefits section: Highlights key fitness aspects like muscle gain, weight loss, stamina #}
     {% include 'components/section_featured_features.html' %}
-    
-    {# Featured products section: Showcases curated fitness products #}
     {% include 'components/section_featured_products.html' %}
-    
-    {# Featured exercise plans section: Displays selected workout routines #}
     {% include 'components/section_featured_exercise_plans.html' %} 
-    
-    {# Featured nutrition plans section: Showcases selected meal guides and advice #}
     {% include 'components/section_featured_nutrition_plans.html' %} 
-    
-    {# 'Gym Anywhere' section: Emphasizes the flexibility of workouts #}
     {% include 'components/section_gym_anywhere.html' %}
-    
-    {# Subscription call to action: Encourages new users to sign up #}
     {% include 'components/section_subscribe_call_to_action.html' %}
-    
-    {# Testimonials section: Features feedback from satisfied clients #}
     {% include 'components/section_testimonials.html' %}
-    
-    {# Contact section: Provides ways for users to get in touch #}
     {% include 'components/section_contact.html' %}
 {% endblock %}

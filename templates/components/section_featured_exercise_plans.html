@@ -2,29 +2,20 @@
 {% load static rating_extras %}
 <section class="section-padding">
     <div class="container text-center">
-        {# Section heading and subheading #}
         <h2 class="section-heading mb-3">EXERCISE PLANS</h2>
         <p class="section-subheading">
             Tailored workout routines to help you achieve your strength, endurance, and flexibility goals.
         </p>
-        
-        {# Grid for displaying featured exercise plans #}
         <div class="row g-4 justify-content-center">
             {% for plan in featured_exercise_plans %}
             <div class="col-lg-4 col-md-6 col-sm-6">
-                {# Individual featured plan card #}
                 <div class="card featured-card h-100">
-                    {# Plan image with placeholder if none exists #}
                     <img src="{% if plan.image %}{{ plan.image.url }}{% else %}{% static 'images/plan_placeholder.jpg' %}{% endif %}" class="card-img-top" alt="{{ plan.title }}">
                     <div class="card-body d-flex flex-column">
-                        {# Plan title and truncated description #}
                         <h5 class="card-title fw-bold">{{ plan.title }}</h5>
                         <p class="card-text text-muted">{{ plan.description|truncatechars:70 }}</p>
-                        
-                        {# Rating and review count display #}
                         <div class="d-flex align-items-center mb-3 mx-auto">
                             <div class="star-rating me-2">
-                                {# Custom filter to display stars based on average rating #}
                                 {% with plan.average_rating|round_int as rounded %}
                                     {% for _ in "12345" %}
                                         <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
@@ -34,21 +25,17 @@
                             <span class="review-count-text">({{ plan.review_count }} Reviews)</span>
                         </div>
 
-                        {# Plan price and call-to-action button #}
-                        <p class="card-price fw-bold fs-5 mt-auto">${{ plan.price|floatformat:2 }}</p>
+                        <p class="card-text fw-bold fs-5 mt-auto">${{ plan.price|floatformat:2 }}</p>
                         <a href="{% url 'exercise_plan_detail' plan.id %}" class="custom-btn btn-sm">View Details</a>
                     </div>
                 </div>
             </div>
             {% empty %}
-            {# Message if no featured plans are available #}
             <div class="col-12">
                 <p class="text-muted">No featured exercise plans available at the moment.</p>
             </div>
             {% endfor %}
         </div>
-        
-        {# Link to view all exercise plans #}
         <div class="mt-5">
             <a href="{% url 'exercise_plan_list' %}" class="custom-btn">View All Exercise Plans</a>
         </div>

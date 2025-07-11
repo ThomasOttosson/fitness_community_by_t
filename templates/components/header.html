@@ -1,26 +1,19 @@
 {% load static %}
 <header>
-    {# Main navigation bar with responsive behavior #}
     <nav class="navbar navbar-expand-lg navbar-light bg-custom-header py-2">
         <div class="container">
-            {# Website logo and link to home page #}
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{% static 'images/fclogo.svg' %}" alt="Fitness Site Logo" class="header-logo">
             </a>
-            
-            {# Mobile toggle button for offcanvas menu #}
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
-            {# Offcanvas menu for mobile navigation #}
             <div class="offcanvas offcanvas-end bg-dark d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Menu</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    {# Mobile navigation links #}
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
@@ -34,27 +27,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{% url 'product_list' %}">Products</a>
                         </li>
-                        {# Conditional rendering of user-specific links #}
                         {% if user.is_authenticated %}
                             <li class="nav-item dropdown">
-                                {# User dropdown for authenticated users #}
                                 <a class="nav-link dropdown-toggle text-white" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ user.username }}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="offcanvasNavbarDropdown">
-                                    {# Links to user-specific pages #}
                                     <li><a class="dropdown-item text-white" href="{% url 'profile' %}">Profile</a></li>
                                     <li><a class="dropdown-item text-white" href="{% url 'cart_detail' %}">Cart</a></li>
                                     <li><a class="dropdown-item text-white" href="{% url 'subscribed_dashboard' %}">Subscriber Dashboard</a></li>
                                     <li><a class="dropdown-item text-white" href="{% url 'order_history' %}">Order History</a></li>
-                                    {# Staff-specific links if user is staff #}
                                     {% if user.is_staff %}
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item text-white" href="{% url 'staff_dashboard' %}">Staff Dashboard</a></li>
                                         <li><a class="dropdown-item text-white" href="{% url 'admin:index' %}">Django Admin</a></li>
                                     {% endif %}
                                     <li><hr class="dropdown-divider"></li>
-                                    {# Logout form #}
                                     <li>
                                         <form method="post" action="{% url 'logout' %}">
                                             {% csrf_token %}
@@ -64,7 +52,6 @@
                                 </ul>
                             </li>
                         {% else %}
-                            {# Login and register links for unauthenticated users #}
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
                             </li>
@@ -75,8 +62,7 @@
                     </ul>
                 </div>
             </div>
-            
-            {# Desktop navigation (hidden on small screens) #}
+            {# Desktop navigation uses a separate structure for display on larger screens #}
             <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -93,24 +79,20 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
-                            {# User dropdown for authenticated users (desktop) #}
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDesktop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ user.username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownDesktop">
-                                {# Links to user-specific pages #}
                                 <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'cart_detail' %}">Cart</a></li>
                                 <li><a class="dropdown-item" href="{% url 'subscribed_dashboard' %}">Subscriber Dashboard</a></li>
                                 <li><a class="dropdown-item" href="{% url 'order_history' %}">Order History</a></li>
-                                {# Staff-specific links if user is staff #}
                                 {% if user.is_staff %}
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{% url 'staff_dashboard' %}">Staff Dashboard</a></li>
                                     <li><a class="dropdown-item" href="{% url 'admin:index' %}">Django Admin</a></li>
                                 {% endif %}
                                 <li><hr class="dropdown-divider"></li>
-                                {# Logout form #}
                                 <li>
                                     <form method="post" action="{% url 'logout' %}">
                                         {% csrf_token %}
@@ -120,7 +102,6 @@
                             </ul>
                         </li>
                     {% else %}
-                        {# Login and register links for unauthenticated users (desktop) #}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Login</a>
                         </li>

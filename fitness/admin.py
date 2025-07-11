@@ -11,6 +11,8 @@ from .models import (
     Review
 )
 
+
+# Register models with the Django admin site for management.
 admin.site.register(ExercisePlan)
 admin.site.register(NutritionPlan)
 admin.site.register(Product)

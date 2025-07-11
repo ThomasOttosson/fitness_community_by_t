@@ -131,12 +131,11 @@ This "Staff Dashboard" serves as a comprehensive administrative control center. 
 An "Administrative Control" section provides quick access to advanced system management and configuration tools via a "DJANGO ADMIN" button. The primary "User Management" section features a search bar for users, and filters to display "ALL USERS," "SUBSCRIBERS," or "STAFF." This section also includes "EXPORT" and "REFRESH" buttons for data handling.
 
 The user table presents detailed information including username, contact details (email or last login), subscription status (e.g., Free), and assigned "STATUS & ROLES" such as "Active," "Staff," and "Admin." The "JOINED" column shows the registration date for each user. Finally, a "BACK TO PROFILE" button allows staff to return to their personal profile page. The standard site header and footer are present. In case the user is not an active subscriber, they will see this notification: "Active subscription required."
-![NO dashboard](/static/images/readme/no-active.jpg)
 
 Subscribers only pages:
 ![NO dashboard](/static/images/readme/no-active.jpg)
 * Monthly Nutrition Plan Subscription Page:
-
+![Monthly Nutrition plan](/static/images/readme/nutrition-plan.jpg)
 This exclusive content page is accessible only to users with an active subscription to the "Monthly Nutrition Plan Subscription, Standard or other subscriptions based on which the page content will be updated." It features a prominent title and a congratulatory message confirming the active subscription. An accompanying image highlights the nutrition plan. The page then lists "Your Nutrition Guidelines," which include detailed meal plans, a personalized hydration guide, a printable grocery list, healthy recipe ideas, and exclusive nutrition tips. A clear note states that this content is visible only to subscribers of this specific plan. A "BACK TO DASHBOARD" button allows users to return to their subscriber overview.
 
 Monthly Exercise Plan Subscription Page:

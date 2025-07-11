@@ -2,29 +2,23 @@
 {% load static rating_extras %}
 <section class="section-padding bg-custom-header">
     <div class="container text-center">
-        {# Section heading and subheading for featured products #}
         <h2 class="section-heading mb-3">OUR TOP PRODUCTS</h2>
         <p class="section-subheading">
             Explore our curated selection of high-quality nutrition and exercise products designed to complement your fitness journey.
         </p>
-        
-        {# Grid for displaying featured products #}
         <div class="row g-4 justify-content-center">
             {% for product in featured_products %}
             <div class="col-lg-4 col-md-6 col-sm-6">
-                {# Individual featured product card #}
                 <div class="card featured-card h-100">
-                    {# Product image, with a placeholder if none is set #}
                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/product_placeholder.jpg' %}{% endif %}" class="card-img-top" alt="{{ product.name }}">
                     <div class="card-body d-flex flex-column">
-                        {# Product name and truncated description #}
                         <h5 class="card-title fw-bold">{{ product.name }}</h5>
                         <p class="card-text text-muted">{{ product.description|truncatechars:70 }}</p>
 
-                        {# Product Rating #}
+                      {# Product Rating #}
                         <div class="d-flex align-items-center mb-3 mx-auto">
                             <div class="star-rating me-2">
-                                {# Visual representation of the product's rating #}
+                                {# 4.7 → 5, 4.4 → 4, None → 0 #}
                                 {% with product.average_rating|round_int as rounded %}
                                     {% for _ in "12345" %}
                                         <i class="fas fa-star{% if forloop.counter <= rounded %} on{% endif %}"></i>
@@ -34,21 +28,17 @@
                             <span class="review-count-text">({{ product.review_count }} Reviews)</span>
                         </div>
 
-                        {# Product price and button to view details #}
                         <p class="card-text fw-bold fs-5 mt-auto">${{ product.price|floatformat:2 }}</p>
                         <a href="{% url 'product_detail' product.id %}" class="custom-btn btn-sm">View Details</a>
                     </div>
                 </div>
             </div>
             {% empty %}
-            {# Message to display when no featured products are found #}
             <div class="col-12">
                 <p class="text-muted">No featured products available at the moment.</p>
             </div>
             {% endfor %}
         </div>
-        
-        {# Link to the main products listing page #}
         <div class="mt-5">
             <a href="{% url 'product_list' %}" class="custom-btn">View All Products</a>
         </div>

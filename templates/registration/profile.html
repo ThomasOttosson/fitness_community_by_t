@@ -6,7 +6,6 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
-            {# Card container for the user profile information #}
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-custom-header py-3">
                     <h2 class="mb-0 text-center text-dark">Welcome, {{ user.username }}!</h2>
@@ -16,7 +15,6 @@
 
                     <div class="row mb-4">
                         <div class="col-md-6 mb-3 mb-md-0">
-                            {# Display of user's account details #}
                             <h4 class="mb-3 fw-bold">Account Details</h4>
                             <p class="mb-2"><strong class="text-dark">Username:</strong> {{ user.username }}</p>
                             <p class="mb-2"><strong class="text-dark">Email:</strong> {{ user.email }}</p>
@@ -25,16 +23,13 @@
                             {% endif %}
                         </div>
                         <div class="col-md-6">
-                            {# Account actions and links #}
                             <h4 class="mb-3 fw-bold">Account Actions</h4>
                             <ul class="list-unstyled">
                                 <li class="mb-2"><a href="{% url 'order_history' %}" class="text-decoration-none hover-accent text-dark"><i class="fas fa-history me-2"></i>View Order History</a></li>
                                 <li class="mb-2"><a href="{% url 'subscribed_dashboard' %}" class="text-decoration-none hover-accent text-dark"><i class="fas fa-chart-line me-2"></i>Access Subscriber Dashboard</a></li>
-                                {# Link to Stripe portal for managing subscriptions, conditional on active subscriptions #}
                                 {% if active_subscriptions %}
-                                    <li class="mb-2"><a href="https://billing.stripe.com/p/login/test_7sY28r7TWahu9P2gWa5J600" target="_blank" rel="noopener noreferrer" class="text-decoration-none hover-accent text-dark"><i class="fas fa-credit-card me-2"></i>Manage My Subscriptions (Stripe Portal)</a></li>
+                                    <li class="mb-2"><a href="https://billing.stripe.com/p/login/test_00w5kD3Lx4TA3mf7xL2Nq00" target="_blank" rel="noopener noreferrer" class="text-decoration-none hover-accent text-dark"><i class="fas fa-credit-card me-2"></i>Manage My Subscriptions (Stripe Portal)</a></li>
                                 {% endif %}
-                                {# Link to staff dashboard, visible only to staff users #}
                                 {% if user.is_staff %}
                                     <li class="mb-2"><a href="{% url 'staff_dashboard' %}" class="text-decoration-none hover-accent text-dark"><i class="fas fa-users-cog me-2"></i>Access Staff Dashboard</a></li>
                                 {% endif %}
@@ -44,20 +39,17 @@
                     </div>
 
                     <h4 class="mt-4 mb-3 fw-bold">Your Active Subscriptions</h4>
-                    {# Display active subscriptions if any #}
                     {% if active_subscriptions %}
                         <div class="list-group mb-4">
                             {% for sub in active_subscriptions %}
                                 <div class="list-group-item d-flex justify-content-between align-items-center">
                                     <div>
-                                        {# Display plan type and link to content #}
                                         {% if sub.exercise_plan %}
                                             <strong class="text-dark">Exercise Plan:</strong> <a href="{% url 'exercise_plan_content' sub.exercise_plan.id %}" class="text-decoration-none hover-accent text-primary">{{ sub.exercise_plan.title }}</a>
                                         {% elif sub.nutrition_plan %}
                                             <strong class="text-dark">Nutrition Plan:</strong> <a href="{% url 'nutrition_plan_content' sub.nutrition_plan.id %}" class="text-decoration-none hover-accent text-primary">{{ sub.nutrition_plan.title }}</a>
                                         {% endif %}
                                     </div>
-                                    {# Subscription status badge #}
                                     <span class="badge bg-success bg-gradient rounded-pill py-2 px-3">
                                         Active Since {{ sub.start_date|date:"M d, Y" }}
                                     </span>
@@ -65,13 +57,11 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        {# Message for users with no active subscriptions #}
                         <div class="alert alert-info text-center" role="alert">
                             You currently have no active subscriptions. <a href="{% url 'home' %}" class="alert-link">Browse our plans to subscribe!</a>
                         </div>
                     {% endif %}
 
-                    {# Logout button #}
                     <div class="text-center mt-5">
                         <form method="post" action="{% url 'logout' %}" class="d-inline-block">
                             {% csrf_token %}

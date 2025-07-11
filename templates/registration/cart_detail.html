@@ -6,16 +6,13 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-12">
-            {# Card container for the shopping cart #}
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-custom-header py-3">
                     <h2 class="mb-0 text-center text-dark">Your Shopping Cart</h2>
                 </div>
                 <div class="card-body p-4">
 
-                    {# Check if cart has items, otherwise display empty cart message #}
                     {% if cart and cart.items.all %}
-                        {# Table to display cart items #}
                         <div class="table-responsive">
                             <table class="table table-hover align-middle">
                                 <thead class="table-light">
@@ -28,11 +25,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {# Loop through each item in the cart #}
                                     {% for item in cart.items.all %}
                                         <tr>
                                             <td>
-                                                {# Display item name and type (Exercise Plan, Nutrition Plan, or Product) #}
                                                 <div class="d-flex align-items-center">
                                                     <div>
                                                         {% if item.exercise_plan %}
@@ -52,7 +47,6 @@
                                             </td>
                                             <td class="text-center">${{ item.price_at_addition|floatformat:2 }}</td>
                                             <td class="text-center">
-                                                {# Form to update item quantity #}
                                                 <form action="{% url 'update_cart_item' item.id %}" method="post" class="d-flex justify-content-center align-items-center">
                                                     {% csrf_token %}
                                                     <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control text-center me-2 cart-quantity-input" onchange="this.form.submit()">
@@ -61,7 +55,6 @@
                                             </td>
                                             <td class="text-center fw-bold">${{ item.get_total|floatformat:2 }}</td>
                                             <td class="text-center">
-                                                {# Form to remove item from cart #}
                                                 <form action="{% url 'remove_from_cart' item.id %}" method="post">
                                                     {% csrf_token %}
                                                     <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
@@ -70,7 +63,6 @@
                                         </tr>
                                     {% endfor %}
                                 </tbody>
-                                {# Cart total row #}
                                 <tfoot>
                                     <tr class="table-light">
                                         <td colspan="3" class="text-end fw-bold fs-5">Cart Total:</td>
@@ -81,7 +73,6 @@
                             </table>
                         </div>
 
-                        {# Navigation buttons for continuing shopping or proceeding to checkout #}
                         <div class="d-flex justify-content-between mt-4">
                             <a href="{% url 'home' %}" class="custom-btn btn-outline-dark">
                                 <i class="fas fa-arrow-left me-2"></i> Continue Shopping
@@ -91,7 +82,6 @@
                             </a>
                         </div>
                     {% else %}
-                        {# Message for an empty cart #}
                         <div class="text-center py-5">
                             <i class="fas fa-shopping-cart display-1 mb-3 text-muted opacity-50"></i>
                             <p class="lead mb-4">Your cart is empty.</p>
