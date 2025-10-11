@@ -413,6 +413,199 @@ I began the design process by creating a wireframe for the homepage to visualize
 
 Throughout the development, I embraced the challenge of integrating complex real-world functionalities. Implementing **Stripe for both one-time product purchases and recurring subscriptions** was a significant learning curve, requiring meticulous backend logic for payment intents, checkout sessions, and post-payment order/subscription fulfillment. Managing user data and access through robust **role-based authorization** (distinguishing between general users, subscribers, and staff administrators) further deepened my understanding of secure web applications. Integrating **Mailchimp for newsletter management** and perfecting the **responsive design with Bootstrap 5's intricacies** were also rewarding aspects of this project. Ultimately, overcoming these challenges allowed me to apply my knowledge, explore new tools, and deliver a fully functional, highly polished e-commerce platform.
 
+# 🌀 Agile Development Documentation
+
+## 1. Agile Approach
+
+This project followed an **Agile development methodology** with short, iterative **1–4 week sprints**.  
+The main goals of this approach were to:
+
+- Deliver working software early and frequently.  
+- Respond quickly to user feedback and changing requirements.  
+- Encourage continuous improvement and team collaboration.  
+- Focus on building features that deliver direct value to users.
+
+Each sprint concluded with a **review and retrospective**, where completed features were tested, and feedback was used to guide the next iteration.
+
+
+
+## 2. Sprint Planning Board
+
+| Sprint | User Story ID | Summary | Status | Priority |
+|:-------|:--------------|:--------|:--------|:----------|
+| Sprint 1 | US01 | As a user, I want to register and log in so I can access personalized content. | ✅ Done | High |
+| Sprint 1 | US02 | As a user, I want to view available exercise and nutrition plans so I can choose one that fits my goals. | ✅ Done | High |
+| Sprint 2 | US03 | As a user, I want to subscribe to a plan securely using Stripe so I can start my fitness journey. | ✅ Done | High |
+| Sprint 2 | US04 | As a user, I want to view my active subscriptions and manage or cancel them. | ✅ Done | Medium |
+| Sprint 3 | US05 | As a user, I want to upgrade or downgrade my plan easily. | ✅ Done | Medium |
+| Sprint 3 | US06 | As an admin, I want to manage plans and view user subscriptions. | ✅ Done | Medium |
+| Sprint 4 | US07 | As a user, I want to receive clear messages when payment fails or is canceled. | ✅ Done | Low |
+
+---
+
+## 3. Agile Workflow
+
+| Stage | Description |
+|--------|-------------|
+| **Product Backlog** | A list of all potential features and user stories for the project. |
+| **Sprint Planning** | Top-priority user stories were selected for development in each sprint. |
+| **Sprint Execution** | Features were implemented, tested, and refined. |
+| **Sprint Review** | Completed stories were reviewed, and the application was tested by users or developers. |
+| **Sprint Retrospective** | The team (or developer) analyzed what went well, what could improve, and adjusted the backlog. |
+
+This process ensured consistent progress and accountability while allowing flexibility in adapting to new feedback.
+
+---
+
+## 4. Feedback & Iteration Cycle
+
+| Sprint | Feedback or Issue | Improvement Implemented |
+|:--------|:------------------|:-------------------------|
+| Sprint 1 | Navigation between exercise and nutrition plans was unclear. | Improved navigation and unified design. |
+| Sprint 2 | Users were not informed of payment success or cancellation. | Added success and cancel feedback pages. |
+| Sprint 3 | Duplicate subscriptions were allowed during Stripe checkout. | Added checks to prevent multiple active plans. |
+| Sprint 4 | Admins lacked visibility into user activity. | Added dashboard to view all active subscriptions. |
+
+The use of iteration and feedback ensured the platform evolved based on user needs and actual testing, not just assumptions.
+
+---
+
+## 5. Reflection on Agile Execution
+
+Applying Agile methods helped in several key ways:
+
+- Encouraged **small, incremental development** rather than large monolithic updates.  
+- Enabled **continuous feedback loops**, improving user experience and reducing bugs early.  
+- Promoted **clear goal-setting** for each sprint, making progress measurable.  
+- Allowed flexibility to adjust priorities when challenges or new ideas arose.
+
+By iteratively refining the system through sprints, the application evolved into a robust fitness platform with smooth user interaction, secure payments, and strong backend management.
+
+---
+
+## 6. Summary of Agile Benefits in This Project
+
+- ✅ Clear sprint structure and backlog prioritization.  
+- ✅ Evidence of continuous iteration and refinement.  
+- ✅ Integration of user feedback into later sprints.  
+- ✅ Strong link between user stories and final implementation.  
+- ✅ Documented Agile workflow and planning process.
+
+# 💼 Business Model
+
+## Overview
+This project provides a **fitness subscription platform** combining **exercise** and **nutrition** plans.
+
+| **Aspect** | **Description** |
+|-------------|-----------------|
+| **Target Audience** | Fitness enthusiasts, gym-goers, and individuals looking for personalized exercise or nutrition guidance. |
+| **Value Proposition** | Simplifies fitness and nutrition planning with ready-to-use exercise and diet plans, plus flexible subscription management. |
+| **Revenue Streams** | Monthly subscription payments through Stripe for exercise and nutrition plans. |
+| **Key Resources** | Django backend, Stripe API, digital content (plans), and a growing user base. |
+| **Customer Relationships** | Automated onboarding, email updates, and personalized dashboards. |
+| **Channels** | Website, SEO marketing, and future integration with social media platforms. |
+| **Cost Structure** | Hosting, Stripe transaction fees, content creation, and ongoing maintenance. |
+| **Growth Strategy** | Introduce premium plans, community features, and AI-based fitness recommendations. |
+
+---
+
+# 🧩 User Story Mapping
+
+This document maps the **user stories** developed throughout the project to their corresponding **epics** and **acceptance criteria**.  
+It visually demonstrates how each part of the application was planned and implemented based on clear user needs and objectives.
+
+---
+
+## 🗺️ User Story Mapping Table
+
+| Epic | User Story | Acceptance Criteria |
+|:------|:------------|:--------------------|
+| 🧍‍♂️ **User Authentication** | As a user, I want to register and log in so I can access my personalized dashboard. | **Given** I am on the registration page, **when** I enter valid details and submit, **then** I should be redirected to my dashboard and logged in successfully. |
+| 💪 **Exercise Plans** | As a user, I want to browse exercise plans and view their details so I can choose one that matches my fitness goals. | **Given** I am on the exercise plans page, **when** I click on a plan, **then** I should see its description, price, and subscription button. |
+| 🥗 **Nutrition Plans** | As a user, I want to view and subscribe to nutrition plans so I can receive structured meal guidance. | **Given** I am viewing a nutrition plan, **when** I click “Subscribe,” **then** I should be redirected to Stripe checkout for payment. |
+| 💳 **Subscription & Payment** | As a user, I want to manage and update my subscription so I can upgrade, downgrade, or cancel anytime. | **Given** I have an active subscription, **when** I go to the subscription dashboard, **then** I should see my active plans and options to modify them. |
+| ⚙️ **Admin Control** | As an admin, I want to add, edit, and remove plans so I can keep the content relevant. | **Given** I am an admin, **when** I log into the admin panel, **then** I can create, update, and delete exercise or nutrition plans. |
+| 🔔 **Feedback & Notifications** | As a user, I want to see messages when actions succeed or fail so I know what’s happening. | **Given** I complete an action (like payment or cancel), **then** I should see a success or error message on the frontend. |
+| 📋 **User Dashboard** | As a user, I want to see my active subscriptions and remaining access period on one page. | **Given** I have an active subscription, **when** I open my dashboard, **then** it should display plan details and expiry information. |
+
+---
+
+## 🧱 User Story Hierarchy (Epic → Stories)
+
+### 🧍‍♂️ Authentication (Epic)
+- **US01:** Register and log in.  
+- **US02:** Access personalized dashboard.
+
+---
+
+### 💪 Exercise & Nutrition (Epic)
+- **US03:** Browse exercise plans.  
+- **US04:** View and subscribe to nutrition plans.  
+- **US05:** View detailed plan content.
+
+---
+
+### 💳 Subscription Management (Epic)
+- **US06:** Subscribe via Stripe checkout.  
+- **US07:** Manage, upgrade, or cancel subscriptions.  
+- **US08:** View active subscriptions in dashboard.
+
+---
+
+### ⚙️ Admin Features (Epic)
+- **US09:** Add, update, or remove plans via admin panel.
+
+---
+
+### 🔔 Feedback & Notifications (Epic)
+- **US10:** Display clear messages for success, errors, and cancellations.
+
+
+
+---
+
+## 🎨 Frontend Flow & User Story Connection (Task 2.8)
+
+The frontend design was **directly guided by these user stories**, ensuring a clear, user-centered experience:
+
+- **Homepage:** Inspired by *“View Plans”* stories — showcases available exercise and nutrition plans to help users explore options easily.  
+- **Registration & Login Pages:** Built from *“User Authentication”* stories, ensuring quick onboarding and personalized access.  
+- **Dashboard:** Reflects the *“Manage Subscriptions”* and *“Active Plans”* stories — users can view, update, or cancel plans from one place.  
+- **Checkout Flow:** Designed around *“Subscribe via Stripe”* story — provides a seamless payment experience with instant feedback.  
+- **Feedback Messages:** Implemented from *“Feedback & Notifications”* story — alerts users to successful payments, cancellations, or failed actions.
+- **Admin Dashboard:** Developed for *“Admin Control”* story — allows easy plan creation, editing, and removal through a structured interface.
+
+This structured alignment between **user stories and UI design** ensures the frontend isn’t random — every page and flow exists to fulfill a specific user goal defined during the Agile planning phase.
+
+---
+
+## ✅ Summary
+
+- All user stories were derived from actual user needs and project goals.  
+- Each story has a clear acceptance criterion for testing and validation.  
+- The frontend flow and UX directly correspond to these user stories.  
+- This mapping serves as documentation proof of Agile planning and user-centered development.
+
+
+
+## Business Model Canvas
+
+| **Key Partners** | **Key Activities** | **Key Resources** |
+|-------------------|-------------------|-------------------|
+| Stripe | Developing, hosting, and maintaining the web app | Django backend, Stripe API |
+| Hosting Providers | Managing user subscriptions and payments | Digital content (exercise and nutrition plans) |
+| Fitness & Nutrition Experts | Creating professional plan content | User database and analytics tools |
+
+| **Value Proposition** | **Customer Relationships** | **Channels** |
+|------------------------|-----------------------------|---------------|
+| Simplifies fitness and nutrition management | Personalized dashboards & automated email updates | Website, SEO, social media |
+
+| **Customer Segments** | **Cost Structure** | **Revenue Streams** |
+|------------------------|-------------------|---------------------|
+| Fitness enthusiasts, gym-goers, health-conscious individuals | Hosting, maintenance, Stripe fees, content creation | Monthly subscriptions via Stripe checkout |
+
+
+
 ## Deployment
 
 This application is configured for deployment to a cloud hosting platform (e.g., Heroku, Render). Key production-ready configurations are integrated:
