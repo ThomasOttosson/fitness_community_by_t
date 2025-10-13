@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # --------------------------------------------------------------------------- #
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 # settings.py – temporary!
 # DEBUG_PROPAGATE_EXCEPTIONS = True
