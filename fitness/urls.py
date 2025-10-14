@@ -103,4 +103,6 @@ urlpatterns = [
 
     # Staff-specific dashboard route.
     path('staff-dashboard/', views.staff_dashboard, name='staff_dashboard'),
+    path('review/<int:pk>/edit/', views.edit_review, name='edit_review'),
+    path('review/<int:pk>/delete/', views.delete_review, name='delete_review'),
 ]

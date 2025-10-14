@@ -13,7 +13,7 @@ from mailchimp_marketing.api_client import ApiClientError
 
 from .forms import CustomUserCreationForm, NewsletterForm, ReviewForm
 from .models import (Cart, CartItem, ExercisePlan, NutritionPlan, Order,
-                     OrderItem, Product, Subscription)
+                     OrderItem, Product, Subscription, Review)
 
 
 @login_required
@@ -166,6 +166,53 @@ def product_detail(request, pk):  # show product detail
         'public-pages/product_detail.html',
         {'product': product, 'reviews': product.reviews.all(), 'form': form},
     )
+
+
+@login_required
+def edit_review(request, pk):
+    """Allow users to edit their own review."""
+    review = get_object_or_404(Review, pk=pk, user=request.user)
+    form = ReviewForm(request.POST or None, instance=review)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Review updated successfully.')
+        if review.product:
+            return redirect('product_detail', pk=review.product.pk)
+        elif review.nutrition_plan:
+            return redirect(
+                'nutrition_plan_detail', pk=review.nutrition_plan.pk)
+        elif review.exercise_plan:
+            return redirect(
+                'exercise_plan_detail', pk=review.exercise_plan.pk)
+
+    return render(
+        request, 'public-pages/review_form.html',
+        {'form': form, 'review': review})
+
+
+@login_required
+def delete_review(request, pk):
+    """Allow users to delete their own review."""
+    review = get_object_or_404(Review, pk=pk, user=request.user)
+    if review.product:
+        plan_id = review.product.pk
+    elif review.nutrition_plan:
+        plan_id = review.nutrition_plan.pk
+    elif review.exercise_plan:
+        plan_id = review.exercise_plan.pk
+
+    if request.method == 'POST':
+        review.delete()
+        messages.success(request, 'Review deleted successfully.')
+        if review.product:
+            return redirect('product_detail', pk=plan_id)
+        elif review.nutrition_plan:
+            return redirect('nutrition_plan_detail', pk=plan_id)
+        elif review.exercise_plan:
+            return redirect('exercise_plan_detail', pk=plan_id)
+
+    return redirect('home')
 
 
 @require_POST
