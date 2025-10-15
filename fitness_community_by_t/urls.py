@@ -14,6 +14,7 @@ from fitness.sitemaps import (
 from django.contrib.auth.views import LoginView
 # Custom login form
 from fitness.forms import CustomAuthenticationForm
+import checkout 
 
 # SITEMAP CONFIGURATION
 sitemaps = {
@@ -29,6 +30,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Fitness app URLs
     path('', include('fitness.urls')),
+    path('products/', include('products.urls')),
+    path('subscriptions/', include('subscriptions.urls')),
+    path('checkout/', include('checkout.urls')),
+    path('payment-success/', checkout.views.payment_success, name='payment_success'),
+
     # Custom login view
     path(
         'accounts/login/',

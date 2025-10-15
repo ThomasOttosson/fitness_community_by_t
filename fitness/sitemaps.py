@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
-from .models import ExercisePlan, NutritionPlan, Product
+from products.models import Product
+from .models import ExercisePlan, NutritionPlan
 
 
 # Sitemap for static pages like home and listing pages

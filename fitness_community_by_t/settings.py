@@ -45,7 +45,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+
+    # apps
     'fitness',
+    'products',
+    'subscriptions',
+    'checkout',
 ]
 
 MIDDLEWARE = [
