@@ -7,7 +7,6 @@ from django.contrib.auth.forms import (
 )
 
 
-
 # email subscription form
 class NewsletterForm(forms.Form):
     email = forms.EmailField(

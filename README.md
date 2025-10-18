@@ -494,18 +494,62 @@ By iteratively refining the system through sprints, the application evolved into
 # 💼 Business Model
 
 ## Overview
-This project provides a **fitness subscription platform** combining **exercise** and **nutrition** plans.
+This project provides a **fitness subscription platform** combining **exercise** and **nutrition** plans.  
+It bridges the gap for individuals who struggle to stay consistent with fitness goals due to lack of structured guidance, accessibility, or time to visit the gym.
+
+---
+
+## Problem Statement
+Many fitness enthusiasts and individuals seeking to live healthier lives struggle with:
+- Lack of **personalized, flexible fitness and nutrition plans**.  
+- Difficulty **maintaining motivation and accountability**.  
+- Inconsistent access to gyms or professional trainers.  
+- Limited understanding of how to **balance workouts and diet** effectively.
+
+Our platform provides a **complete, on-site fitness experience** — allowing users to stay on track anywhere with expert-designed plans, guided progress tracking, and adaptable subscriptions.
+
+---
+
+## Target Audience Needs
+| **Audience Segment** | **Key Needs** | **How We Address Them** |
+|-----------------------|---------------|--------------------------|
+| Fitness Beginners | Simple, guided plans without gym equipment | Offer zero-equipment home workouts and meal guides |
+| Busy Professionals | Flexible routines to fit tight schedules | Short, effective plans accessible anytime |
+| Health Enthusiasts | Personalized progression and expert guidance | Structured workout and nutrition plans |
+| Gym-Goers | Integrated training and nutrition tools | Combine exercise and diet plans in one dashboard |
+
+---
+
+## Core Business Model
 
 | **Aspect** | **Description** |
 |-------------|-----------------|
-| **Target Audience** | Fitness enthusiasts, gym-goers, and individuals looking for personalized exercise or nutrition guidance. |
-| **Value Proposition** | Simplifies fitness and nutrition planning with ready-to-use exercise and diet plans, plus flexible subscription management. |
+| **Target Audience** | Fitness beginners, gym-goers, and busy individuals looking for personalized, flexible fitness solutions. |
+| **Value Proposition** | Simplifies fitness and nutrition planning with ready-to-use exercise and diet plans, plus adaptable subscription management. |
 | **Revenue Streams** | Monthly subscription payments through Stripe for exercise and nutrition plans. |
 | **Key Resources** | Django backend, Stripe API, digital content (plans), and a growing user base. |
 | **Customer Relationships** | Automated onboarding, email updates, and personalized dashboards. |
 | **Channels** | Website, SEO marketing, and future integration with social media platforms. |
 | **Cost Structure** | Hosting, Stripe transaction fees, content creation, and ongoing maintenance. |
 | **Growth Strategy** | Introduce premium plans, community features, and AI-based fitness recommendations. |
+
+---
+
+## Business Model Canvas
+
+| **Key Partners** | **Key Activities** | **Key Resources** |
+|-------------------|-------------------|-------------------|
+| Stripe | Developing, hosting, and maintaining the web app | Django backend, Stripe API |
+| Hosting Providers | Managing user subscriptions and payments | Digital content (exercise and nutrition plans) |
+| Fitness & Nutrition Experts | Creating professional plan content | User database and analytics tools |
+
+| **Value Proposition** | **Customer Relationships** | **Channels** |
+|------------------------|-----------------------------|---------------|
+| Simplifies fitness and nutrition management through accessible plans and guidance | Personalized dashboards & automated email updates | Website, SEO, social media |
+
+| **Customer Segments** | **Cost Structure** | **Revenue Streams** |
+|------------------------|-------------------|---------------------|
+| Fitness beginners, professionals, and gym-goers | Hosting, maintenance, Stripe fees, content creation | Monthly subscriptions via Stripe checkout |
 
 ---
 
@@ -586,23 +630,6 @@ This structured alignment between **user stories and UI design** ensures the fro
 - The frontend flow and UX directly correspond to these user stories.  
 - This mapping serves as documentation proof of Agile planning and user-centered development.
 
-
-
-## Business Model Canvas
-
-| **Key Partners** | **Key Activities** | **Key Resources** |
-|-------------------|-------------------|-------------------|
-| Stripe | Developing, hosting, and maintaining the web app | Django backend, Stripe API |
-| Hosting Providers | Managing user subscriptions and payments | Digital content (exercise and nutrition plans) |
-| Fitness & Nutrition Experts | Creating professional plan content | User database and analytics tools |
-
-| **Value Proposition** | **Customer Relationships** | **Channels** |
-|------------------------|-----------------------------|---------------|
-| Simplifies fitness and nutrition management | Personalized dashboards & automated email updates | Website, SEO, social media |
-
-| **Customer Segments** | **Cost Structure** | **Revenue Streams** |
-|------------------------|-------------------|---------------------|
-| Fitness enthusiasts, gym-goers, health-conscious individuals | Hosting, maintenance, Stripe fees, content creation | Monthly subscriptions via Stripe checkout |
 
 
 

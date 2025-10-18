@@ -7,7 +7,7 @@ from .forms import ReviewForm
 from .models import Product, Review
 
 
-# Create your views here.
+# Product list view
 def product_list(request):  # list products
     products = Product.objects.all().annotate(
         average_rating=Avg('reviews__rating'), review_count=Count('reviews')
@@ -44,6 +44,7 @@ def product_detail(request, pk):  # show product detail
     )
 
 
+# editing product reviews
 @login_required
 def edit_review(request, pk):
     """Allow users to edit their own review."""
@@ -58,13 +59,14 @@ def edit_review(request, pk):
         elif review.nutrition_plan:
             return redirect('nutrition_plan_detail',
                             pk=review.nutrition_plan.pk)
-        elif review.exercise_plan: 
+        elif review.exercise_plan:
             return redirect('exercise_plan_detail', pk=review.exercise_plan.pk)
 
     return render(request, 'public-pages/review_form.html',
                   {'form': form, 'review': review})
 
 
+# delete product review
 @login_required
 def delete_review(request, pk):
     """Allow users to delete their own review."""
