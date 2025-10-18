@@ -16,10 +16,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # --------------------------------------------------------------------------- #
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
-# settings.py – temporary!
-# DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = [
     'fitnesscommunity-30ebceb8eb6b.herokuapp.com',
